@@ -1,0 +1,9 @@
+.lateral {
+  width: 15em;
+  height: 90vh;
+  top: 6.4em;
+
+  position: fixed;
+  z-index: 1000;
+  background-color: #101010;
+}

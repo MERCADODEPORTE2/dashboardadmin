@@ -1,0 +1,32 @@
+.navbar {
+  width: 100%;
+  height: 6.4em;
+  top: 0;
+
+  position: sticky;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  background-color: #101010;
+}
+
+.navbar > div {
+  width: 95%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar div a > img {
+  width: 90px;
+  height: 90px;
+
+  margin: 6px 0;
+}
+
+.navbar div > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

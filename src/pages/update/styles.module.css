@@ -1,0 +1,18 @@
+.update {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+.center {
+  width: 60em;
+
+  display: flex;
+  justify-content: center;
+
+  margin: 2em 0 1em 15em;
+  border-radius: 10px;
+  /* margin-left: 15em; */
+  background-color: red;
+}

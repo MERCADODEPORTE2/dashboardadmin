@@ -1,0 +1,70 @@
+.carro {
+  /* background-color: aqua; */
+  height: 40em;
+  width: 35em;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  height: 100%;
+  /* background: #101010; */
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+}
+
+@media (max-width: 900px) {
+  .carro {
+    height: 50em;
+  }
+}
+@media (max-width: 700px) {
+  .carro {
+    height: 45em;
+  }
+}
+@media (max-width: 600px) {
+  .carro {
+    height: 40em;
+  }
+}
+
+@media (max-width: 550px) {
+  .carro {
+    height: 35em;
+  }
+}
+
+@media (max-width: 400px) {
+  .carro {
+    height: 30em;
+  }
+}
+
+@media (max-width: 350px) {
+  .carro {
+    height: 25em;
+  }
+}
+
+@media (max-width: 300px) {
+  .carro {
+    height: 20em;
+  }
+}
