@@ -1,8 +1,9 @@
-import { GET_PRODUCTS, GET_PRODUCT_BY_ID } from "./actions";
+import { GET_COLORS, GET_PRODUCTS, GET_PRODUCT_BY_ID } from "./actions";
 
 const initialState = {
   products: [],
   detail: {},
+  colors: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         detail: action.payload,
+      };
+    case GET_COLORS:
+      return {
+        ...state,
+        colors: action.payload,
       };
 
     default:

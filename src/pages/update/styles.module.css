@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .update {
   width: 100%;
 
@@ -10,9 +15,145 @@
 
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   margin: 2em 0 1em 15em;
   border-radius: 10px;
-  /* margin-left: 15em; */
+  background-color: #e7e7e7;
+}
+
+.property {
+  width: 20em;
+}
+
+.property .names {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 3px 0 5px 0;
+  border: 1px solid gray;
+  border-radius: 5px 5px 0 0;
+
+  font-size: 18px;
+  font-family: "Sarabun", sans-serif;
+  background-color: #f5f5f5;
+}
+
+.property .names > span {
+  margin-left: 4px;
+}
+
+.changes {
+  height: 4em;
+  width: 20em;
+
+  border-radius: 0 0 5px 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.changes > select {
   background-color: red;
+  width: 13.9em;
+  height: 1.9em;
+
+  border: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 16px;
+}
+
+.changes select > option {
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 17px;
+}
+
+textarea {
+  resize: none;
+
+  width: 17.6em;
+  height: 10em;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 18px;
+}
+
+/* --------- Butons Actions --------- */
+.actions {
+  border: none;
+  border-radius: 5px;
+  padding: 3px 3px 0 3px;
+  margin-right: 6px;
+
+  cursor: pointer;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.actions:active {
+  transform: translateY(2px);
+}
+
+.ok {
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 2px 2px 0 2px;
+  margin-left: 6px;
+
+  cursor: pointer;
+
+  background-color: rgba(4, 109, 4, 0.418);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.ok:active {
+  transform: translateY(2px);
+}
+
+.clear {
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 2px 2px 0 2px;
+  margin-left: 6px;
+
+  cursor: pointer;
+
+  background-color: rgba(255, 0, 0, 0.363);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.clear :active {
+  transform: translateY(2px);
+}
+
+/* ---------------------------------- */
+
+.inputs {
+  width: 16em;
+  height: 2.2em;
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 6px;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
 }
