@@ -10,6 +10,7 @@ const Box = ({
   open,
   setOpen,
   handlerChange,
+  errorName,
 }) => {
   //
   const clear = () => {
@@ -21,6 +22,7 @@ const Box = ({
 
   return (
     <div className={styles.property}>
+      <span>{nameInput}</span>
       <div className={styles.names}>
         {inputProperty !== "" ? (
           <span>{inputProperty}</span>
@@ -45,7 +47,6 @@ const Box = ({
       {open && (
         <div className={styles.changes}>
           <form action="" onSubmit={(e) => e.preventDefault()}>
-            {/* <label htmlFor="">cambiar nombre de producto</label> */}
             <input
               autoComplete="off"
               type="text"
@@ -83,6 +84,37 @@ const Box = ({
           </div>
         </div>
       )}
+      {
+        errorName ? (
+          <div className={styles.error}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              style={{ fill: "red" }}
+            >
+              <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+              <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+            </svg>
+            <p>{errorName}</p>
+          </div>
+        ) : null
+        // (
+        //   <div className={styles.correct}>
+        //     <svg
+        //       xmlns="http://www.w3.org/2000/svg"
+        //       width="24"
+        //       height="24"
+        //       viewBox="0 0 24 24"
+        //       style={{ fill: "green" }}
+        //     >
+        //       <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+        //     </svg>
+        //     <p>Bien!</p>
+        //   </div>
+        // )
+      }
     </div>
   );
 };

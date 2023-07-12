@@ -1,9 +1,19 @@
-import { GET_COLORS, GET_PRODUCTS, GET_PRODUCT_BY_ID } from "./actions";
+import {
+  GET_COLORS,
+  GET_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+  GET_TAGS,
+  GET_SIZES,
+  GET_IMAGE_CARRUSEL,
+} from "./actions";
 
 const initialState = {
   products: [],
   detail: {},
   colors: [],
+  tags: [],
+  sizes: [],
+  images: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,7 +33,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         colors: action.payload,
       };
-
+    case GET_TAGS:
+      return {
+        ...state,
+        tags: action.payload,
+      };
+    case GET_SIZES:
+      return {
+        ...state,
+        sizes: action.payload,
+      };
+    case GET_IMAGE_CARRUSEL:
+      return {
+        ...state,
+        images: action.payload,
+      };
     default:
       return {
         ...state,

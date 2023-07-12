@@ -1,0 +1,257 @@
+.row {
+  min-width: 45em;
+
+  margin-top: 1em;
+  border-radius: 8px;
+  padding: 3px 0 10px 0;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+
+  background-color: #f5f5f5;
+}
+/* <----------- START -----------> */
+.input {
+  width: 20em;
+  min-height: 4em;
+
+  margin: 5px;
+  border-radius: 5px;
+  padding-bottom: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.input > input {
+  width: 16em;
+  height: 2.2em;
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 6px;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.input > span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-left: 5px;
+}
+/* <----------- END -------------> */
+
+/* <----------- START -----------> */
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 5px;
+}
+
+.text > span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.text > textarea {
+  resize: none;
+
+  width: 17.6em;
+  height: 10em;
+  border-radius: 5px;
+  padding-left: 5px;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 18px;
+}
+/* <----------- END -------------> */
+
+/* <----------- START -----------> */
+.selectSTR {
+  width: 20em;
+  min-height: 4em;
+
+  border-radius: 5px;
+  padding-bottom: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.selectSTR > span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-left: 5px;
+}
+.selectSTR > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectSTR div > span {
+  margin: 5px;
+  padding: 0 10px 2px 10px;
+  border-radius: 30px;
+
+  font-family: "Sarabun", sans-serif;
+  background-color: #ffd904;
+}
+
+.selectSTR div > select {
+  width: 13.9em;
+  height: 1.9em;
+
+  border: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 16px;
+}
+
+.selectSTR div select > option {
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 17px;
+}
+/* <----------- END -------------> */
+
+/* <----------- START -----------> */
+.selects {
+  min-width: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0.5em 0;
+  border-radius: 5px;
+  margin: 10px 0 5px 0;
+  border: 1px solid gray;
+}
+
+.selects > span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.selects > select {
+  width: 13.9em;
+  height: 1.9em;
+
+  border: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+
+  background-color: #f5f5f5;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 16px;
+}
+
+.selects select > option {
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 17px;
+}
+
+.titleSelects {
+  width: 18em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleSelects > div {
+  /* background-color: green; */
+  margin: 0 0 5px 5px;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background-color: #f5f5f5; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.titleSelects div > span {
+  border-radius: 30px 0 0 30px;
+  padding: 3px 8px 3px 8px;
+  background-color: #ffd904;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.titleSelects div > button {
+  border: 0;
+  border-radius: 0 30px 30px 0;
+  padding: 1px 2px 1px 0;
+  cursor: pointer;
+
+  background-color: #f5f5f5;
+}
+/* <----------- END -------------> */
+
+.create {
+  border: none;
+  border-radius: 5px;
+  margin-top: 1em;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #101010;
+  background-color: #ffd904;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.create:active {
+  transform: translateY(2px);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+
+  color: red;
+
+  margin: 6px 4px 0 0;
+  font-family: "Sarabun", sans-serif;
+  font-size: 14px;
+}
+
+.error > p {
+  margin-left: 4px;
+}

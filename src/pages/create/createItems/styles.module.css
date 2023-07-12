@@ -1,0 +1,242 @@
+.items {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerOn {
+  width: 60em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  padding-bottom: 1em;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+}
+
+.centerOff {
+  width: 60em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding-bottom: 1em;
+  margin: 2em 0 1em 15em;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+}
+
+.open {
+  width: 10em;
+
+  border: none;
+  border-radius: 5px;
+  margin: 1em 1em 0 1em;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  color: #101010;
+  background-color: #ffd904;
+}
+
+.open:active {
+  transform: translateY(2px);
+}
+
+.item {
+  width: 25em;
+  height: auto;
+
+  margin: 1em 0 0 0;
+  border-radius: 8px;
+  border: 2px solid #ffd904;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.top {
+  /* background-color: red; */
+  height: 3em;
+  width: 90%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: row-reverse;
+}
+
+.top > button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  padding: 0.5em 1em;
+  border: 2px solid #ffd904;
+  border-radius: 0 0 5px 5px;
+  border-top: none;
+  cursor: pointer;
+
+  background-color: #e7e7e7;
+}
+
+.item .top > span {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  padding: 0.5em 1.5em;
+  border: 2px solid #ffd904;
+  border-radius: 0 0 5px 5px;
+  border-top: none;
+
+  background-color: #e7e7e7;
+}
+.option {
+  width: 80%;
+  height: 2.5em;
+
+  padding: 0 1.8em;
+  margin: 1em 0 0 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.containerInput {
+  /* background-color: green; */
+  margin: 1em;
+  padding: 2px;
+  border-radius: 6px;
+  border: 2px solid #ffd904;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerInput > input {
+  width: 18em;
+  height: 2.8em;
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 6px;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.containerInput > button {
+  width: 3em;
+  height: 39px;
+
+  border-radius: 5px;
+  padding: 0 5px;
+  cursor: pointer;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.results {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.remove {
+  border: 1px solid red;
+  border-radius: 5px;
+  padding: 2px 2px 0 2px;
+  margin-left: 6px;
+
+  cursor: pointer;
+
+  background-color: rgba(255, 0, 0, 0.363);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.remove :active {
+  transform: translateY(2px);
+}
+
+/* <-------- DELETE ----------> */
+
+.delete {
+  background-color: #10101023;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  position: fixed;
+  z-index: 900;
+}
+
+.delete .center {
+  width: 15em;
+  height: 10em;
+
+  z-index: 900;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #101010;
+}
+
+.delete .center > button {
+  /* border: 2px solid gray; */
+  padding: 10px 30px;
+  margin: 6px 0;
+  border-radius: 5px;
+
+  color: #101010;
+  cursor: pointer;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.deleteButton {
+  border: 2px solid red;
+  background-color: rgb(255, 60, 60);
+}

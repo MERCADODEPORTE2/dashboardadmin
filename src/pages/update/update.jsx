@@ -1,29 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useFormik } from "formik";
-// import * as Yup from "yup";
+import {
+  patchProduct,
+  getProductByID,
+  getColors,
+  getTags,
+  getSizes,
+} from "../../redux/actions";
 
-import { patchProduct, getProductByID, getColors } from "../../redux/actions";
 import Box from "./boxes";
+import TextArea from "./textArea";
+import SelectSTR from "./selectStr";
 import Select from "./selectsArr";
 
 import styles from "./styles.module.css";
-import TextArea from "./textArea";
-import SelectSTR from "./selectStr";
+
+const validate = (input, productByID) => {
+  let errors = {};
+  if (input.name === productByID.name) {
+    errors.name = "El nombre no puede ser igual al actual";
+  }
+
+  if (input.category === productByID.category) {
+    errors.category = "la categoria no puede ser igual la actual";
+  }
+
+  if (input.detail === productByID.detail) {
+    errors.detail = "el detalle no puede ser igual al actual";
+  }
+
+  if (input.description === productByID.description) {
+    errors.description = "la descripcion no puede ser igual a la actual";
+  }
+
+  if (input.brand === productByID.brand) {
+    errors.brand = "la marca no puede ser igual a la anterior";
+  }
+
+  if (input.genre === productByID.genre) {
+    errors.genre = "el genero no puede ser igual al anterior";
+  }
+
+  if (input.score === productByID.score) {
+    errors.score = "el puntaje no puede ser igual al puntaje actual";
+  }
+  return errors;
+};
 
 const Update = ({ id }) => {
   const dispatch = useDispatch();
+
   const productByID = useSelector((state) => state.detail);
   const colors = useSelector((state) => state.colors);
-
-  // console.log(productByID);
-  useEffect(() => {
-    dispatch(getProductByID(id));
-    if (!colors.length) {
-      dispatch(getColors());
-    }
-  }, [dispatch, id, colors]);
-
+  const tags = useSelector((state) => state.tags);
+  const sizes = useSelector((state) => state.sizes);
+  // <-------->
+  const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "", //
     category: "", //
@@ -35,10 +67,23 @@ const Update = ({ id }) => {
     score: "", //
     genre: "", //
     image: [],
-    sizes: [],
-    tags: [],
-    colors: [],
+    sizes: [], //
+    tags: [], //
+    colors: [], //
   });
+
+  useEffect(() => {
+    dispatch(getProductByID(id));
+    if (!colors.length) {
+      dispatch(getColors());
+    }
+    if (!tags.length) {
+      dispatch(getTags());
+    }
+    if (!sizes.length) {
+      dispatch(getSizes());
+    }
+  }, [dispatch, id, colors, tags, sizes, errors, input]);
 
   const handlerChange = (event) => {
     const property = event.target.name;
@@ -48,12 +93,15 @@ const Update = ({ id }) => {
       ...input,
       [property]: value,
     });
-    // setErrors(
-    //   validate({
-    //     ...input,
-    //     [property]: value,
-    //   })
-    // );
+    setErrors(
+      validate(
+        {
+          ...input,
+          [property]: value,
+        },
+        productByID
+      )
+    );
   };
 
   const selectCategory = (e) => {
@@ -65,16 +113,18 @@ const Update = ({ id }) => {
     });
   };
 
-  // ----------- Arrays -----------
+  // <------------------> // Arrays // <----------------------> //
+  // colors ---------------------->
   const [selectedColors, setSelectedItems] = useState([]);
 
   const SelectItems = (e) => {
     const value = e.target.value;
     const property = e.target.name;
+    // console.log(value);
 
     setInput({
       ...input,
-      [property]: [...input[property], value],
+      [property]: [...input[property], parseInt(value)],
     });
 
     setSelectedItems([
@@ -96,7 +146,97 @@ const Update = ({ id }) => {
   const clear = () => {
     setSelectedItems(selectedColors.filter((color) => color === "iiiiiiii"));
   };
+
+  // tags ------------------------>
+  const [selectedTag, setSelectedTags] = useState([]);
+
+  const selectTags = (e) => {
+    const value = e.target.value;
+    const property = e.target.name;
+
+    setInput({
+      ...input,
+      [property]: [...input[property], parseInt(value)],
+    });
+
+    setSelectedTags([
+      ...selectedTag,
+      tags?.find((elem) => elem.id === parseInt(value)),
+    ]);
+  };
+
+  const removeTag = (data) => {
+    // data === id || name color
+    setInput({
+      ...input,
+      tags: input.tags?.filter((elem) => parseInt(elem) !== data),
+    });
+
+    setSelectedTags(selectedTag.filter((elem) => elem.id !== data));
+  };
+
+  const clearTagsArr = () => {
+    setSelectedTags(selectedTag.filter((tag) => tag === "iiiiiiii"));
+  };
+
+  // sizes ------------------>
+
+  const [selectedSize, setSelectedSizes] = useState([]);
+
+  const selectSize = (e) => {
+    const value = e.target.value;
+    const property = e.target.name;
+
+    setInput({
+      ...input,
+      [property]: [...input[property], parseInt(value)],
+    });
+
+    setSelectedSizes([
+      ...selectedSize,
+      sizes?.find((elem) => elem.id === parseInt(value)),
+    ]);
+  };
+
+  const removeSize = (data) => {
+    // data === id || name color
+    setInput({
+      ...input,
+      sizes: input.sizes?.filter((elem) => parseInt(elem) !== data),
+    });
+
+    setSelectedSizes(selectedSize.filter((elem) => elem.id !== data));
+  };
+
+  const clearSizesArr = () => {
+    setSelectedSizes([]);
+  };
   // -----------------------------
+
+  // <---------- Images ----------->
+  const [url, setUrl] = useState("");
+  const handleImageInputChange = () => {
+    setInput({
+      ...input,
+      image: [...input.image, url],
+    });
+    setUrl("");
+  };
+
+  const clearImages = () => {
+    setInput({
+      ...input,
+      image: input.image?.filter((img) => img === "iiiiiiii"),
+    });
+  };
+
+  const removeImg = (img) => {
+    setInput({
+      ...input,
+      image: input.image?.filter((image) => image !== img),
+    });
+  };
+  // <------------------------------>
 
   // ---------- opens -------------
   const [openName, setOpenName] = useState(false);
@@ -106,169 +246,145 @@ const Update = ({ id }) => {
   const [openBrand, setOpenBrand] = useState(false);
   const [openScore, setOpenScore] = useState(false);
   const [openGenre, setOpenGenre] = useState(false);
+  const [openImage, setOpenImage] = useState(false);
+  // <------- Arrays ------->
   const [openColors, setOpenColors] = useState(false);
+  const [openTags, setOpenTags] = useState(false);
+  const [openSizes, setOpenSizes] = useState(false);
 
   // -----------------------------
+
+  const submitPatchProduct = () => {
+    if (Object.keys(input).length !== 0) {
+      let objectSend = {};
+      for (const property in input) {
+        if (Array.isArray(input[property])) {
+          if (input[property].length > 0) {
+            objectSend[property] = input[property];
+            objectSend.id = id;
+          }
+        } else {
+          if (input[property] !== "") {
+            objectSend[property] = input[property];
+            objectSend.id = id;
+          }
+        }
+      }
+      dispatch(patchProduct(objectSend));
+      setInput({
+        name: "", //
+        category: "", //
+        stock: "",
+        detail: "", //
+        description: "", //
+        price: "",
+        brand: "", //
+        score: "", //
+        genre: "", //
+        image: [],
+        sizes: [], //
+        tags: [], //
+        colors: [], //
+      });
+    }
+  };
 
   return (
     <div className={styles.update}>
       <div className={styles.center}>
-        <div>
-          {productByID.image?.map((img, i) => (
-            <img key={i} src={img} alt={img} width={100} height={120} />
-          ))}
-        </div>
-        <span>nombre</span>
-        <Box
-          input={input}
-          nameInput={"name"}
-          inputProperty={input.name}
-          setInput={setInput}
-          productByIDProperty={productByID.name}
-          open={openName}
-          setOpen={setOpenName}
-          handlerChange={handlerChange}
-        />
-        <span>categorias</span>
-        <SelectSTR
-          input={input}
-          nameInput={"category"}
-          inputProperty={input.category}
-          setInput={setInput}
-          productByIDProperty={productByID.category}
-          open={openCategory}
-          setOpen={setOpenCategory}
-          selectCategory={selectCategory}
-        />
-        <span>detalle</span>
-        <TextArea
-          input={input}
-          nameInput={"detail"}
-          inputProperty={input.detail}
-          setInput={setInput}
-          productByIDProperty={productByID.detail}
-          open={openDetail}
-          setOpen={setOpenDetail}
-          handlerChange={handlerChange}
-        />
-        <span>descripcion</span>
-        <TextArea
-          input={input}
-          nameInput={"description"}
-          inputProperty={input.description}
-          setInput={setInput}
-          productByIDProperty={productByID.description}
-          open={openDescription}
-          setOpen={setOpenDescription}
-          handlerChange={handlerChange}
-        />
-        <span>marca</span>
-        <Box
-          input={input}
-          nameInput={"brand"}
-          inputProperty={input.brand}
-          setInput={setInput}
-          productByIDProperty={productByID.brand}
-          open={openBrand}
-          setOpen={setOpenBrand}
-          handlerChange={handlerChange}
-        />
-        <span>score</span>
-        <Box
-          input={input}
-          nameInput={"score"}
-          inputProperty={input.score}
-          setInput={setInput}
-          productByIDProperty={productByID.score}
-          open={openScore}
-          setOpen={setOpenScore}
-          handlerChange={handlerChange}
-        />
-        <SelectSTR
-          input={input}
-          nameInput={"genre"}
-          inputProperty={input.genre}
-          setInput={setInput}
-          productByIDProperty={productByID.genre}
-          open={openGenre}
-          setOpen={setOpenGenre}
-          selectCategory={selectCategory}
-        />
-        <div>
-          <div className={styles.names}>
-            {!selectedColors.length
-              ? productByID.colors?.map((color, i) => (
-                  <div key={i}>
-                    <span>{color}</span>
-                    {openColors === true ? (
-                      <button onClick={() => removeItem(color)}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          style={{ fill: "#101010" }}
-                        >
-                          <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
-                        </svg>
-                      </button>
-                    ) : null}
+        <div className={!openImage ? styles.images : styles.addImages}>
+          <div
+            className={
+              !openImage ? styles.containerImgsOff : styles.containerImgsOn
+            }
+          >
+            {productByID.image?.map((img, i) => (
+              <div key={i} className={styles.image}>
+                <img src={img} alt={img} />
+                {!openImage ? null : (
+                  <div onClick={() => removeImg(img)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      style={{ fill: "#101010" }}
+                    >
+                      <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                    </svg>
                   </div>
-                ))
-              : selectedColors?.map((color, i) => (
-                  <div key={i}>
-                    <span>{color.name}</span>
-                    {openColors === true ? (
-                      <button onClick={() => removeItem(color.id)}>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          style={{ fill: "#101010" }}
-                        >
-                          <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
-                        </svg>
-                      </button>
-                    ) : null}
-                  </div>
-                ))}
-            {openColors === false ? (
-              <button
-                onClick={() => setOpenColors(true)}
-                className={styles.actions}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  style={{ fill: "#101010" }}
-                >
-                  <path d="M19 15v-3h-2v3h-3v2h3v3h2v-3h3v-2h-.937zM4 7h11v2H4zm0 4h11v2H4zm0 4h8v2H4z"></path>
-                </svg>
-              </button>
-            ) : null}
+                )}
+              </div>
+            ))}
+            {input.image?.map((img, i) => (
+              <div key={i} className={styles.image}>
+                <img src={img} alt={img} width={100} height={120} />
+                <div onClick={() => removeImg(img)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "#101010" }}
+                  >
+                    <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                  </svg>
+                </div>
+              </div>
+            ))}
           </div>
-          {openColors && (
-            <div>
-              <select
-                id="colors"
-                name="colors"
-                defaultValue="none"
-                className={styles.select}
-                onChange={(e) => SelectItems(e)}
+          {!openImage ? (
+            <div
+              onClick={() => setOpenImage(true)}
+              className={openImage === false ? styles.actions : styles.none}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                style={{ fill: "#101010" }}
               >
-                <option value="none">colores</option>
-                {colors?.map((color) => (
-                  <option value={color.id} key={color.id}>
-                    {color.name}
-                  </option>
-                ))}
-              </select>
+                <path d="M4 5h13v7h2V5c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h8v-2H4V5z"></path>
+                <path d="m8 11-3 4h11l-4-6-3 4z"></path>
+                <path d="M19 14h-2v3h-3v2h3v3h2v-3h3v-2h-3z"></path>
+              </svg>
+            </div>
+          ) : null}
+          {openImage && (
+            <div className={styles.addImagesChanges}>
+              <form
+                action=""
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleImageInputChange();
+                }}
+              >
+                <input
+                  type="text"
+                  placeholder="URL de imagen subida"
+                  className={styles.inputs}
+                  name="url"
+                  value={url}
+                  autoComplete="off"
+                  onChange={(e) => setUrl(e.target.value)}
+                  // hidden={path === "update"}
+                />
+                <button type="submit" className={styles.post}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "#101010" }}
+                  >
+                    <path d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM13 14v3h-2v-3H8l4-5 4 5h-3z"></path>
+                  </svg>
+                </button>
+              </form>
               <div>
                 <button
-                  onClick={() => setOpenColors(false)}
+                  onClick={() => setOpenImage(false)}
                   className={styles.ok}
                 >
                   <svg
@@ -281,7 +397,7 @@ const Update = ({ id }) => {
                     <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
                   </svg>
                 </button>
-                <button onClick={() => clear()} className={styles.clear}>
+                <button onClick={() => clearImages()} className={styles.clear}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -296,6 +412,129 @@ const Update = ({ id }) => {
             </div>
           )}
         </div>
+        <div className={styles.row}>
+          <Box
+            input={input}
+            nameInput={"name"}
+            inputProperty={input.name}
+            setInput={setInput}
+            productByIDProperty={productByID.name}
+            open={openName}
+            setOpen={setOpenName}
+            handlerChange={handlerChange}
+            errorName={errors.name}
+          />
+          <SelectSTR
+            input={input}
+            nameInput={"category"}
+            inputProperty={input.category}
+            setInput={setInput}
+            productByIDProperty={productByID.category}
+            open={openCategory}
+            setOpen={setOpenCategory}
+            selectCategory={selectCategory}
+            errorName={errors.category}
+          />
+        </div>
+        <div className={styles.row}>
+          <TextArea
+            input={input}
+            nameInput={"detail"}
+            inputProperty={input.detail}
+            setInput={setInput}
+            productByIDProperty={productByID.detail}
+            open={openDetail}
+            setOpen={setOpenDetail}
+            handlerChange={handlerChange}
+            errorName={errors.detail}
+          />
+          <TextArea
+            input={input}
+            nameInput={"description"}
+            inputProperty={input.description}
+            setInput={setInput}
+            productByIDProperty={productByID.description}
+            open={openDescription}
+            setOpen={setOpenDescription}
+            handlerChange={handlerChange}
+            errorName={errors.description}
+          />
+        </div>
+        <div className={styles.row}>
+          <Box
+            input={input}
+            nameInput={"brand"}
+            inputProperty={input.brand}
+            setInput={setInput}
+            productByIDProperty={productByID.brand}
+            open={openBrand}
+            setOpen={setOpenBrand}
+            handlerChange={handlerChange}
+            errorName={errors.brand}
+          />
+          <Box
+            input={input}
+            nameInput={"score"}
+            inputProperty={input.score}
+            setInput={setInput}
+            productByIDProperty={productByID.score}
+            open={openScore}
+            setOpen={setOpenScore}
+            handlerChange={handlerChange}
+            errorName={errors.score}
+          />
+        </div>
+        <div className={styles.row}>
+          <SelectSTR
+            input={input}
+            nameInput={"genre"}
+            inputProperty={input.genre}
+            setInput={setInput}
+            productByIDProperty={productByID.genre}
+            open={openGenre}
+            setOpen={setOpenGenre}
+            selectCategory={selectCategory}
+            errorName={errors.genre}
+          />
+          <Select
+            productByIDProperty={productByID.colors}
+            nameInput={"colors"}
+            open={openColors}
+            setOpen={setOpenColors}
+            selectItems={selectedColors}
+            funSelectItems={SelectItems}
+            removeItem={removeItem}
+            state={colors}
+            clear={clear}
+          />
+        </div>
+        <div className={styles.row}>
+          <Select
+            productByIDProperty={productByID.sizes}
+            nameInput={"sizes"}
+            open={openSizes}
+            setOpen={setOpenSizes}
+            selectItems={selectedSize}
+            funSelectItems={selectSize}
+            removeItem={removeSize}
+            state={sizes}
+            clear={clearSizesArr}
+          />
+          <Select
+            productByIDProperty={productByID.tags}
+            nameInput={"tags"}
+            open={openTags}
+            setOpen={setOpenTags}
+            selectItems={selectedTag}
+            funSelectItems={selectTags}
+            removeItem={removeTag}
+            state={tags}
+            clear={clearTagsArr}
+          />
+        </div>
+        <button className={styles.send} onClick={() => submitPatchProduct()}>
+          cambiar
+        </button>
       </div>
     </div>
   );

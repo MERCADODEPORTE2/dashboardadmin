@@ -1,0 +1,122 @@
+.addimages {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  width: 60em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding-bottom: 1em;
+  margin: 2em 0 1em 15em;
+  border-radius: 10px;
+  background-color: #e7e7e7;
+}
+
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  border-radius: 8px;
+  margin-top: 1em;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.input .title {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 8px;
+  background-color: #f5f5f5;
+}
+
+.input .title > span {
+  width: 16em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5em 0.5em;
+  border-radius: 0 0 5px 5px;
+  border-top: none;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  background-color: #ffd904;
+}
+
+.containerInput {
+  /* background-color: green; */
+  margin: 1em;
+  padding: 2px;
+  border-radius: 6px;
+  border: 2px solid #ffd904;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerInput > input {
+  width: 18em;
+  height: 2.8em;
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 6px;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.containerInput > button {
+  width: 3em;
+  height: 40px;
+
+  border-radius: 5px;
+  padding: 0 5px;
+  cursor: pointer;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.view > button {
+  padding: 0.5em 0.8em;
+  border: 2px solid #ffd904;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 1em;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+  background-color: #ffff;
+}
+
+.view button > div {
+  /* background-color: firebrick; */
+  width: 4em;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
