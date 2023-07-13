@@ -18,9 +18,11 @@ export const DELETE_SIZE = "DELETE_SIZE";
 // <------->
 export const GET_IMAGE_CARRUSEL = "GET_IMAGE_CARRUSEL";
 export const POST_IMAGE_CARRUSEL = "POST_IMAGE_CARRUSEL";
+export const DELETE_IMAGE_CARRUSEL = "DELETE_IMAGE_CARRUSEL";
 // <------->
 export const GET_FAQS = "GET_FAQS";
 export const POST_FAQS = "POST_FAQS";
+export const DELETE_FAQ = "DELETE_FAQ";
 
 export const getProducts = () => {
   return (dispatch) => {
@@ -156,14 +158,37 @@ export const deleteSizes = (id) => {
   };
 };
 
-export const getImages = (img) => {
+// <--------- IMG --------->
+
+export const getImages = () => {
   return (dispatch) => {
     return axios
-      .get(`images/${img}`)
+      .get(`images`)
       .then((res) => dispatch({ type: GET_IMAGE_CARRUSEL, payload: res.data }))
       .catch((error) => console.error(error));
   };
 };
+
+export const postImages = (img) => {
+  return (dispatch) => {
+    return axios
+      .post(`images`, img)
+      .then((res) => dispatch({ type: POST_IMAGE_CARRUSEL, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
+
+export const deleteImages = (id) => {
+  return (dispatch) => {
+    return axios
+      .delete(`images/${id}`)
+      .then((res) =>
+        dispatch({ type: DELETE_IMAGE_CARRUSEL, payload: res.data })
+      )
+      .catch((error) => console.error(error));
+  };
+};
+
 // <------------------->
 
 export const postFAQS = (faq) => {
@@ -180,6 +205,15 @@ export const getFaqs = () => {
     return axios
       .get(`faqs`)
       .then((res) => dispatch({ type: GET_FAQS, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
+
+export const deleteFaqs = (id) => {
+  return (dispatch) => {
+    return axios
+      .delete(`faqs/${id}`)
+      .then((res) => dispatch({ type: DELETE_FAQ, payload: res.data }))
       .catch((error) => console.error(error));
   };
 };

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.css";
-import { postFAQS, getFaqs } from "../../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+
+import { postFAQS, getFaqs, deleteFaqs } from "../../../redux/actions";
+
+import styles from "./styles.module.css";
 
 const validate = (input) => {
   let errors = {};
@@ -25,7 +27,7 @@ const FAQS = () => {
     question: "",
   });
 
-  console.log(FAQS);
+  // console.log(FAQS);
   useEffect(() => {
     if (!FAQS.length) {
       dispatch(getFaqs());
@@ -62,7 +64,10 @@ const FAQS = () => {
       });
     }
   };
-  console.log(faqs);
+
+  const deleteFaqsByID = (id) => {
+    dispatch(deleteFaqs(id));
+  };
 
   return (
     <div className={styles.faqs}>
@@ -121,16 +126,45 @@ const FAQS = () => {
           <button onClick={submit}>CREAR</button>
         </div>
         <div className={styles.bottom}>
-          <span>PREGUNTAS FRECUENTES</span>
-          <div className={styles.containerFAQS}>
-            {FAQS?.map((faq, i) => (
-              <details key={i}>
-                <summary>
-                  {faq.id} - {faq.question}
-                </summary>
-                <p>{faq.response}</p>
-              </details>
-            ))}
+          <div className={styles.left}>
+            <span>PREGUNTAS FRECUENTES</span>
+            <div className={styles.containerFAQS}>
+              {FAQS?.map((faq, i) => (
+                <details key={i}>
+                  <summary>
+                    {faq.id} - {faq.question}
+                  </summary>
+                  <p>{faq.response}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+          <div className={styles.rigth}>
+            <span>ELIMINAR PREGUNTAS</span>
+            <div className={styles.containerDelete}>
+              {FAQS?.map((faq, i) => (
+                <div key={i} className={styles.cardFAQdelete}>
+                  <button
+                    className={styles.remove}
+                    onClick={() => deleteFaqsByID(faq.id)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      style={{ fill: "#101010" }}
+                    >
+                      <path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path>
+                      <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                    </svg>
+                  </button>
+                  <span>
+                    {faq.id} {faq.question}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
