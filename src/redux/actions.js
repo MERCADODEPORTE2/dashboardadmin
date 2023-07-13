@@ -164,6 +164,16 @@ export const getImages = (img) => {
       .catch((error) => console.error(error));
   };
 };
+// <------------------->
+
+export const postFAQS = (faq) => {
+  return (dispatch) => {
+    return axios
+      .post(`faqs`, faq)
+      .then((res) => dispatch({ type: POST_FAQS, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
 
 export const getFaqs = () => {
   return (dispatch) => {

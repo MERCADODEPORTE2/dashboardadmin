@@ -123,3 +123,63 @@
 .container > button:active {
   transform: translateY(2px);
 }
+
+.error {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 16px;
+
+  color: red;
+}
+
+.bottom {
+  margin-top: 1em;
+}
+
+.bottom > span {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-bottom: 2px solid #ffd904;
+}
+
+.containerFAQS {
+  width: 22em;
+  border-radius: 8px;
+  padding: 1em 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.containerFAQS > details {
+  /* background-color: rebeccapurple; */
+  width: 90%;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 18px;
+}
+
+.containerFAQS details > summary {
+  border-radius: 5px 5px 0 0;
+  padding: 0.5em 0.5em;
+
+  background-color: #e7e7e7;
+}
+
+.containerFAQS details > p {
+  padding: 0.5em;
+
+  background-color: #ffd904;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}

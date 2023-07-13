@@ -5,6 +5,7 @@ import {
   GET_TAGS,
   GET_SIZES,
   GET_IMAGE_CARRUSEL,
+  GET_FAQS,
 } from "./actions";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   tags: [],
   sizes: [],
   images: [],
+  faqs: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -47,6 +49,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         images: action.payload,
+      };
+    case GET_FAQS:
+      return {
+        ...state,
+        faqs: action.payload,
       };
     default:
       return {
