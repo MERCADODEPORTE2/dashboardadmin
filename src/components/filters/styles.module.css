@@ -1,0 +1,95 @@
+.filters {
+  width: 60em;
+  min-height: 7em;
+
+  margin-bottom: 2em;
+  border-radius: 10px;
+  border: 1px solid gray;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #e7e7e7;
+}
+
+.topOff {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.topOn {
+  width: 100%;
+
+  margin-top: 2em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.containerFilters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.buttonOrder {
+  width: 80%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.divSelect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.divSelect > select {
+  width: 8em;
+  height: 1.9em;
+
+  border: none;
+  border-radius: 5px;
+  border: 1px solid gray;
+
+  background-color: #f5f5f5;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 16px;
+}
+
+.divSelect select > option {
+  background-color: #e7e7e7;
+
+  font-family: "Sarabun", sans-serif;
+  font-size: 17px;
+}
+
+.buttonEnd {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  border: 2px solid green;
+  border-radius: 5px;
+  cursor: pointer;
+
+  background-color: rgba(0, 128, 0, 0.596);
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.end {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

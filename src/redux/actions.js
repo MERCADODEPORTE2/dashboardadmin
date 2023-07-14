@@ -23,6 +23,10 @@ export const DELETE_IMAGE_CARRUSEL = "DELETE_IMAGE_CARRUSEL";
 export const GET_FAQS = "GET_FAQS";
 export const POST_FAQS = "POST_FAQS";
 export const DELETE_FAQ = "DELETE_FAQ";
+// <------->
+export const FILTERS = "FILTERS";
+export const ORDER = "ORDER";
+export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 
 export const getProducts = () => {
   return (dispatch) => {
@@ -217,3 +221,20 @@ export const deleteFaqs = (id) => {
       .catch((error) => console.error(error));
   };
 };
+
+// <--------->
+
+export const order = (payload) => ({
+  type: ORDER,
+  payload,
+});
+
+export const filter = (payload) => ({
+  type: FILTERS,
+  payload,
+});
+
+export const orderByScore = (payload) => ({
+  type: ORDER_BY_SCORE,
+  payload,
+});

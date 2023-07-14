@@ -62,6 +62,9 @@ const FAQS = () => {
         response: "",
         question: "",
       });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   };
 

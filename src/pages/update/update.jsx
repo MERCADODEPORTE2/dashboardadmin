@@ -286,6 +286,10 @@ const Update = ({ id }) => {
         tags: [], //
         colors: [], //
       });
+      setTimeout(() => {
+        window.location.reload();
+        window.location.href = `/detail/${id}`;
+      }, 2000);
     }
   };
 
@@ -533,7 +537,7 @@ const Update = ({ id }) => {
           />
         </div>
         <button className={styles.send} onClick={() => submitPatchProduct()}>
-          cambiar
+          CAMBIAR
         </button>
       </div>
     </div>

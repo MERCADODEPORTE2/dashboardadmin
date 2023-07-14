@@ -1,11 +1,14 @@
 import React from "react";
-import styles from "./styles.module.css";
-import Card from "../card/card";
 
-const Container = ({ products }) => {
+import Card from "../card/card";
+import Filters from "../filters/filter";
+
+import styles from "./styles.module.css";
+
+const Container = ({ products, setOrder, tags, sizes, colors }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.filters}>filters</div>
+      <Filters tags={tags} colors={colors} sizes={sizes} setOrder={setOrder} />
       <div className={styles.center}>
         <div className={styles.top}>
           <div className={styles.centerOne}>
@@ -22,6 +25,7 @@ const Container = ({ products }) => {
             img={product?.image[0]}
             id={product.id}
             category={product.category}
+            score={product.score}
             key={product.id}
           />
         ))}

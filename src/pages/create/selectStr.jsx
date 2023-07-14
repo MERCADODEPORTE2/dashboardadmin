@@ -20,6 +20,11 @@ const SelectSTR = ({ nameInput, inputProperty, selectCategory, errorProp }) => {
               <option value="deportes">Deportes</option>
               <option value="calzado">Calzado</option>
             </>
+          ) : nameInput === "state" ? (
+            <>
+              <option value="nuevo">Nuevo</option>
+              <option value="nuevo">Antiguo</option>
+            </>
           ) : (
             <>
               <option value="mujer">Mujer</option>

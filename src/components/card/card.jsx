@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import Delete from "./delete";
 
-const Card = ({ img, name, category, id }) => {
+const Card = ({ img, name, category, id, score }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -12,6 +12,7 @@ const Card = ({ img, name, category, id }) => {
         <span>{name.slice(0, 15)}</span>
         <span>{id.slice(0, 20)}</span>
         <span>{category}</span>
+        {/* <span>{score}</span> */}
         <div className={styles.actions}>
           <a href={`/detail/${id}`}>
             <svg
