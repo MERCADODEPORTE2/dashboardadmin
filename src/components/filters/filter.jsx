@@ -36,6 +36,7 @@ const Filters = ({ setOrder, tags, colors, sizes }) => {
     // console.log(products);s
     const selectedSizes = products.filter((elem) => elem.sizes.includes(value));
     dispatch(filter(selectedSizes));
+    setOpen(true);
   };
 
   const filterByColors = (e) => {
@@ -44,6 +45,7 @@ const Filters = ({ setOrder, tags, colors, sizes }) => {
       elem.colors.includes(value)
     );
     dispatch(filter(selectedColor));
+    setOpen(true);
   };
 
   const filterByCategory = (e) => {
@@ -53,18 +55,21 @@ const Filters = ({ setOrder, tags, colors, sizes }) => {
       (elem) => elem.category === value
     );
     dispatch(filter(selectedCategories));
+    setOpen(true);
   };
 
   const filterByGenre = (e) => {
     const value = e.target.value;
     const selectedGenre = products.filter((elem) => elem.genre === value);
     dispatch(filter(selectedGenre));
+    setOpen(true);
   };
 
   const filterByState = (e) => {
     const value = e.target.value;
     const selectedState = products.filter((elem) => elem.state === value);
     dispatch(filter(selectedState));
+    setOpen(true);
   };
 
   const removeFilters = () => {

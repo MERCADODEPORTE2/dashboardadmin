@@ -110,6 +110,9 @@ const AddImages = () => {
 
   const remove = (id) => {
     dispatch(deleteImages(id));
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
 
   return (

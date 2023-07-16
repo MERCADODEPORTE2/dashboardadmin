@@ -10,7 +10,7 @@ const Card = ({ img, name, category, id, score }) => {
       <div className={styles.center}>
         <img src={img} alt="photos" />
         <span>{name.slice(0, 15)}</span>
-        <span>{id.slice(0, 20)}</span>
+        <span className={styles.none}>{id.slice(0, 20)}</span>
         <span>{category}</span>
         {/* <span>{score}</span> */}
         <div className={styles.actions}>

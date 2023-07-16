@@ -14,7 +14,7 @@ const Container = ({ products, setOrder, tags, sizes, colors }) => {
           <div className={styles.centerOne}>
             <span>imagen</span>
             <span>nombre</span>
-            <span>id</span>
+            <span className={styles.none}>id</span>
             <span>categoria</span>
             <span>acción</span>
           </div>
@@ -29,7 +29,6 @@ const Container = ({ products, setOrder, tags, sizes, colors }) => {
             key={product.id}
           />
         ))}
-
         <div className={styles.bottom}>-</div>
       </div>
     </div>
