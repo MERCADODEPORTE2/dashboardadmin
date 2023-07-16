@@ -27,6 +27,10 @@ export const DELETE_FAQ = "DELETE_FAQ";
 export const FILTERS = "FILTERS";
 export const ORDER = "ORDER";
 export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
+// <------->
+export const GET_USERS = "GET_USERS";
+export const POST_USER = "POST_USER";
+export const DELETE_USER = "DELETE_USER";
 
 export const getProducts = () => {
   return (dispatch) => {
@@ -164,10 +168,10 @@ export const deleteSizes = (id) => {
 
 // <--------- IMG --------->
 
-export const getImages = () => {
+export const getImages = (type) => {
   return (dispatch) => {
     return axios
-      .get(`images`)
+      .get(`images?q=${type}`)
       .then((res) => dispatch({ type: GET_IMAGE_CARRUSEL, payload: res.data }))
       .catch((error) => console.error(error));
   };
@@ -229,12 +233,39 @@ export const order = (payload) => ({
   payload,
 });
 
+export const orderByScore = (payload) => ({
+  type: ORDER_BY_SCORE,
+  payload,
+});
+
 export const filter = (payload) => ({
   type: FILTERS,
   payload,
 });
 
-export const orderByScore = (payload) => ({
-  type: ORDER_BY_SCORE,
-  payload,
-});
+export const getUsers = () => {
+  return (dispatch) => {
+    return axios
+      .get(`user`)
+      .then((res) => dispatch({ type: GET_USERS, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
+
+export const postUsers = (user) => {
+  return (dispatch) => {
+    return axios
+      .post(`user`, user)
+      .then((res) => dispatch({ type: POST_USER, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
+
+export const deleteUsers = (id) => {
+  return (dispatch) => {
+    return axios
+      .delete(`user/${id}`)
+      .then((res) => dispatch({ type: DELETE_USER, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};

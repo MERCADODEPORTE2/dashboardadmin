@@ -9,11 +9,13 @@ import {
   FILTERS,
   ORDER,
   ORDER_BY_SCORE,
+  GET_USERS,
 } from "./actions";
 
 const initialState = {
   products: [],
   detail: {},
+  users: [],
   colors: [],
   tags: [],
   sizes: [],
@@ -93,6 +95,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
       };
     default:
       return {

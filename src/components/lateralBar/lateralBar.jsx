@@ -20,6 +20,9 @@ const LateralBar = (props) => {
         <a href="/create/faqs">
           <span>Crear FAQS</span>
         </a>
+        <a href="/register">
+          <span>Registrar Usuario</span>
+        </a>
       </div>
     </div>
   );

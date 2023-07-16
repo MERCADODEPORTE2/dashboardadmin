@@ -10,6 +10,8 @@ import {
   CreateItems,
   AddImages,
   FAQS,
+  Register,
+  Login,
 } from "./pages/index";
 import { NavBar, LateralBar } from "./components/index";
 
@@ -49,6 +51,14 @@ function App() {
 
       <Route exact path="/create/faqs">
         <FAQS />
+      </Route>
+
+      <Route exact path="/register">
+        <Register />
+      </Route>
+
+      <Route exact path="/login/user">
+        <Login />
       </Route>
     </div>
   );

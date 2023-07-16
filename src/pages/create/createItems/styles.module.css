@@ -7,7 +7,7 @@
 }
 
 .centerOn {
-  width: 60em;
+  width: 75%;
 
   display: flex;
   justify-content: center;
@@ -20,7 +20,7 @@
 }
 
 .centerOff {
-  width: 60em;
+  width: 75%;
 
   display: flex;
   justify-content: center;

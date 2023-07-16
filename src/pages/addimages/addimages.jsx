@@ -9,8 +9,6 @@ const AddImages = () => {
   const dispatch = useDispatch();
   const images = useSelector((state) => state.images);
 
-  let img = images.map((elem) => elem.image).flat();
-
   useEffect(() => {
     if (!images.length) {
       dispatch(getImages());
@@ -110,6 +108,10 @@ const AddImages = () => {
     }
   };
 
+  const remove = (id) => {
+    dispatch(deleteImages(id));
+  };
+
   return (
     <div className={styles.addimages}>
       <div className={styles.center}>
@@ -159,9 +161,29 @@ const AddImages = () => {
       <div className={styles.centerBottom}>
         <span>IMAGENES DE LA BASE DE DATOS</span>
         <div className={styles.imagesBack}>
-          {img.map((elem, i) => (
-            <div key={i}>
-              <img src={elem} alt={elem} />
+          {images.map((elem, i) => (
+            <div key={i} className={styles.containerImages}>
+              {elem.image.map((el, i) => (
+                <div key={i} className={styles.dadImage}>
+                  <a href={el} target="_blank">
+                    <img src={el} alt={el} />
+                  </a>
+                  <div className={styles.childImage}>
+                    <button onClick={() => remove(elem.id)}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        style={{ fill: "#101010" }}
+                      >
+                        <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                      </svg>
+                    </button>
+                    <span>{elem.name}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           ))}
         </div>
