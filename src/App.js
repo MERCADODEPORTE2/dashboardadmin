@@ -1,5 +1,5 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import {
@@ -18,12 +18,26 @@ import { NavBar, LateralBar } from "./components/index";
 axios.defaults.baseURL = "https://back-production-c55d.up.railway.app/";
 
 function App() {
+  const location = useLocation();
+  const history = useHistory();
+
+  const user = window.localStorage.getItem("user");
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/");
+    }
+  }, [user]);
+
   return (
     <div className="App">
-      <NavBar></NavBar>
-      <LateralBar></LateralBar>
-
+      {location.pathname !== "/" && <NavBar />}
+      {location.pathname !== "/" && <LateralBar />}
       <Route exact path="/">
+        <Login />
+      </Route>
+
+      <Route exact path="/home">
         <Home />
       </Route>
 
@@ -57,9 +71,9 @@ function App() {
         <Register />
       </Route>
 
-      <Route exact path="/login/user">
+      {/* <Route exact path="/login/user">
         <Login />
-      </Route>
+      </Route> */}
     </div>
   );
 }

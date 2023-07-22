@@ -112,7 +112,7 @@ const AddImages = () => {
     dispatch(deleteImages(id));
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1000);
   };
 
   return (

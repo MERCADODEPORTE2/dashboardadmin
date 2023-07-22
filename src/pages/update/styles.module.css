@@ -16,7 +16,7 @@
 }
 
 .center {
-  width: 60em;
+  width: 75%;
 
   display: flex;
   justify-content: center;
@@ -44,7 +44,10 @@
 }
 
 .addImages {
-  min-width: 19.7em;
+  width: 100%;
+  min-width: 14em;
+  max-width: 20em;
+
   margin-top: 0.5em;
 
   display: flex;
@@ -110,6 +113,7 @@
   /* background-color: yellow; */
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
+  text-decoration: 2px underline #ffd904;
 }
 
 .selects {
@@ -121,19 +125,16 @@
   padding-top: 0.5em;
   border: 1px solid gray;
   border-radius: 8px;
-  /* background-color: rebeccapurple; */
 }
 
 .selects div > span {
-  /* background-color: yellow; */
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   margin-left: 5px;
 }
 
 .selects .names {
-  max-width: 20em;
-  /* background-color: red; */
+  max-width: 90%;
   display: flex;
   flex-wrap: wrap;
 }
@@ -169,7 +170,7 @@
 }
 
 .titleSelects {
-  min-width: 20em;
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -211,7 +212,13 @@
 
 .addImagesChanges {
   min-height: 4em;
-  width: 20em;
+  width: 100%;
+  min-width: 15em;
+  max-width: 20em;
+
+  width: 90%;
+  min-width: 14em;
+  max-width: 50em;
 
   display: flex;
   justify-content: center;
@@ -342,15 +349,18 @@
 }
 
 .row {
-  min-width: 45em;
+  width: 90%;
+  min-width: 14em;
+  max-width: 50em;
 
-  margin-top: 1em;
+  margin: 1em 1em 0 1em;
   border-radius: 8px;
   padding: 3px 0 10px 0;
 
   display: flex;
   justify-content: space-around;
   align-items: start;
+  flex-wrap: wrap;
   flex-direction: row;
 
   background-color: #f5f5f5;
@@ -426,4 +436,57 @@
 
 .send:active {
   transform: translateY(2px);
+}
+
+@media (max-width: 1020px) {
+  .center {
+    width: 90%;
+
+    margin: 0%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .row {
+    display: flex;
+  }
+}
+@media (max-width: 400px) {
+  .property {
+    margin-bottom: 0.5em;
+    width: 90%;
+  }
+  .images {
+    min-width: 14em;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .addImages {
+    min-width: 11em;
+
+    display: flex;
+    flex-direction: column;
+  }
+  .selects {
+    min-width: 12em;
+    width: 90%;
+    margin-bottom: 0.5em;
+  }
+
+  .addImagesChanges {
+    width: 90%;
+  }
+  .changes {
+    background-color: red;
+    width: 100%;
+  }
+
+  .inputs {
+    width: 85%;
+  }
+
+  .editInfo > textarea {
+    width: 100%;
+  }
 }

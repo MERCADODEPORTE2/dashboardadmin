@@ -1,7 +1,7 @@
 .carro {
-  /* background-color: aqua; */
+  /* height: 40em; */
   height: 40em;
-  width: 35em;
+  width: 100%;
 }
 
 .swiper {
@@ -13,9 +13,7 @@
   text-align: center;
   font-size: 18px;
   height: 100%;
-  /* background: #101010; */
 
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,19 +27,9 @@
   border-radius: 10px 0 0 10px;
 }
 
-@media (max-width: 900px) {
-  .carro {
-    height: 50em;
-  }
-}
-@media (max-width: 700px) {
-  .carro {
-    height: 45em;
-  }
-}
-@media (max-width: 600px) {
-  .carro {
-    height: 40em;
+@media (max-width: 1020px) {
+  .swiper-slide img {
+    border-radius: 10px 10px 0 0;
   }
 }
 

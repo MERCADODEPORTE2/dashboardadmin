@@ -255,3 +255,40 @@
 
   background-color: rgba(255, 0, 0, 0.596);
 }
+
+@media (max-width: 1020px) {
+  .center,
+  .centerBottom {
+    margin: 1em 0 0 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .center,
+  .centerBottom {
+    width: 95%;
+  }
+}
+
+@media (max-width: 400px) {
+  .input {
+    width: 90%;
+  }
+
+  .input .title {
+    width: 95%;
+  }
+
+  .input .title > span {
+    width: 90%;
+    text-align: center;
+  }
+
+  .containerInput {
+    width: 90%;
+  }
+
+  .containerInput > input {
+    width: 80%;
+  }
+}

@@ -10,6 +10,7 @@ import {
   ORDER,
   ORDER_BY_SCORE,
   GET_USERS,
+  GET_CHECK_USER,
 } from "./actions";
 
 const initialState = {
@@ -97,6 +98,11 @@ const rootReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case GET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case GET_CHECK_USER:
       return {
         ...state,
         users: action.payload,

@@ -1,0 +1,161 @@
+.login {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #101010;
+}
+
+.login > img {
+  width: 600px;
+  height: 600px;
+
+  filter: brightness(50%);
+  filter: blur(8px);
+  /* object-fit: cover; */
+}
+
+.center {
+  width: 100%;
+  min-width: 11em;
+  max-width: 18em;
+  height: 20em;
+  position: absolute;
+
+  border-radius: 8px;
+  border: 1px solid #ffd904;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+
+  background-color: #101010;
+}
+
+.center > img {
+  width: 80px;
+  height: 80px;
+
+  margin-top: 1.5em;
+}
+
+.center > form {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.center form > div {
+  width: 77%;
+
+  margin-top: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+.center form div > label {
+  font-family: "Sarabun", sans-serif;
+  font-size: 12px;
+  color: #f5f5f5;
+}
+
+.center form div > input {
+  width: 100%;
+  max-width: 16em;
+  min-width: 12em;
+  height: 2.2em;
+
+  border: none;
+  border-radius: 5px;
+  padding-left: 6px;
+
+  border: 1px solid gray;
+  background-color: #e7e7e7;
+}
+
+.viewPassword {
+  width: 77%;
+
+  border: 0;
+  cursor: pointer;
+  margin-top: 3px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: transparent;
+  text-decoration: underline;
+  color: #f5f5f5;
+  font-size: 12px;
+}
+
+.viewPassword > div {
+  width: auto;
+  margin-left: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.center form > .send {
+  border: 3px solid #ffd904;
+  margin-top: 0.8em;
+  padding: 0.5em 2em;
+  border-radius: 5px;
+  cursor: pointer;
+
+  font-family: "Sarabun", sans-serif;
+
+  color: #f5f5f5;
+  background-color: transparent;
+}
+
+.center form > .send:active {
+  background-color: #ffd904;
+  color: #101010;
+  transform: translateY(2px);
+}
+
+.error {
+  color: red;
+  font-family: "Sarabun", sans-serif;
+  font-size: 14px;
+}
+
+@media (max-width: 620px) {
+  .login > img {
+    width: 90%;
+    height: 65%;
+  }
+}
+
+@media (max-width: 500px) {
+  .login > img {
+    width: 90%;
+    height: 45%;
+  }
+}
+
+@media (max-width: 400px) {
+  .login > img {
+    width: 90%;
+    height: 45%;
+  }
+
+  .center {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}

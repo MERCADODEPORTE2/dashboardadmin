@@ -29,6 +29,7 @@ export const ORDER = "ORDER";
 export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 // <------->
 export const GET_USERS = "GET_USERS";
+export const GET_CHECK_USER = "GET_CHECK_USER";
 export const POST_USER = "POST_USER";
 export const DELETE_USER = "DELETE_USER";
 
@@ -243,11 +244,25 @@ export const filter = (payload) => ({
   payload,
 });
 
+// <--------->
+
 export const getUsers = () => {
   return (dispatch) => {
     return axios
       .get(`user`)
       .then((res) => dispatch({ type: GET_USERS, payload: res.data }))
+      .catch((error) => console.error(error));
+  };
+};
+
+export const checkUser = (secret, email) => {
+  return (dispatch) => {
+    return axios
+      .get(`user/${secret}/${email}`)
+      .then((res) =>
+        // console.log(res.data)
+        dispatch({ type: GET_CHECK_USER, payload: res.data })
+      )
       .catch((error) => console.error(error));
   };
 };
@@ -268,4 +283,8 @@ export const deleteUsers = (id) => {
       .then((res) => dispatch({ type: DELETE_USER, payload: res.data }))
       .catch((error) => console.error(error));
   };
+};
+
+export const outSesion = () => {
+  console.log("aaaaaaaaa");
 };

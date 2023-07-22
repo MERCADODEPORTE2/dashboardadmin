@@ -289,7 +289,7 @@ const Update = ({ id }) => {
       setTimeout(() => {
         window.location.reload();
         window.location.href = `/detail/${id}`;
-      }, 2000);
+      }, 1000);
     }
   };
 

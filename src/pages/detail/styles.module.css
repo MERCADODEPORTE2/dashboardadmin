@@ -11,7 +11,7 @@
 }
 
 .detail .container {
-  width: 60em;
+  width: 75%;
 
   margin: 1em 0 1em 15em;
   border-radius: 10px;
@@ -197,7 +197,7 @@
   background-color: #101010;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1020px) {
   .detail .info .one {
     margin-top: 1em;
   }
@@ -207,6 +207,8 @@
   }
   .detail .container {
     margin: 0;
+    margin-top: 1em;
+    width: 70%;
   }
 
   .detail .container .top {
@@ -227,6 +229,8 @@
     width: 100%;
     height: auto;
     padding-bottom: 2em;
+
+    border-radius: 0 0 10px 10px;
   }
 
   .bottom {
@@ -240,5 +244,11 @@
 
   .bottom .two {
     width: 95%;
+  }
+}
+
+@media (max-width: 580px) {
+  .detail .container {
+    width: 90%;
   }
 }

@@ -3,9 +3,9 @@
   min-height: 7em;
 
   margin-bottom: 2em;
+  margin-left: 15em;
   border-radius: 10px;
   border: 1px solid gray;
-  margin-left: 15em;
   padding-bottom: 0.5em;
 
   display: flex;
@@ -99,14 +99,20 @@
 }
 
 @media (max-width: 1290px) {
-  .filters {
-    width: 50%;
-  }
+  /* .filters {
+    width: 0%;
+  } */
   .topOff {
     width: 90%;
     height: auto;
 
     display: flex;
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1020px) {
+  .filters {
+    margin-left: 0;
   }
 }

@@ -1,11 +1,48 @@
-import React, { useState } from "react";
-import { postUsers } from "../../redux/actions";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { postUsers, getUsers } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
+import CardUser from "./cardUser";
 import styles from "./styles.module.css";
+
+const validate = (user, twoName) => {
+  let errors = {};
+
+  if (!user.profile_image) {
+    errors.profile_image = "Agregar imagen de usuario";
+  }
+  if (!user.name || !/^[A-Za-z\s]+$/g.test(user.name)) {
+    errors.name = "Solo se permiten letras";
+  }
+  if (
+    !user.account_name ||
+    /^[A-Za-z][A-Za-z0-9_]{7,29}$/.test(user.account_name)
+  ) {
+    errors.account_name = "Menos de 8 caracteres";
+  }
+  if (!user.email || user.email.length < 15) {
+    errors.email = "E-mail invalido";
+  }
+  if (
+    !user.secret ||
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm.test(user.secret)
+  ) {
+    errors.secret =
+      "La contraseña debe contener: mas de 8 caracteres, 1 mayúscula y un número";
+  }
+  if (user.secret !== twoName) {
+    errors.towSeceret = "Las contraseñas no coinciden";
+  }
+  return errors;
+};
 
 const Register = () => {
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
+
+  const [URL, setURL] = useState("");
+  const [twoName, setTwoName] = useState("");
+  const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
     name: "",
     account_name: "",
@@ -13,6 +50,20 @@ const Register = () => {
     secret: "",
     profile_image: "",
   });
+
+  useEffect(() => {
+    if (!users.length) {
+      dispatch(getUsers());
+    }
+  }, [users, dispatch]);
+
+  const sendImg = () => {
+    setUser({
+      ...user,
+      profile_image: URL,
+    });
+    setURL("");
+  };
   const handlerChange = (e) => {
     const value = e.target.value;
     const property = e.target.name;
@@ -21,78 +72,246 @@ const Register = () => {
       ...user,
       [property]: value,
     });
+
+    setErrors(
+      validate(
+        {
+          ...user,
+          [property]: value,
+        },
+        twoName
+      )
+    );
   };
   const submirUser = () => {
-    // dispatch(postUsers(user))
-    console.log(user);
+    if (
+      user.name !== "" &&
+      user.account_name !== "" &&
+      user.email !== "" &&
+      user.secret !== ""
+    ) {
+      dispatch(postUsers(user));
+    }
   };
 
   return (
     <div className={styles.register}>
-      <form
-        action=""
-        onSubmit={(e) => {
-          e.preventDefault();
-          submirUser();
-        }}
-      >
-        <input
-          type="text"
-          name="profile_image"
-          value={user.profile_image}
-          onChange={(e) => handlerChange(e)}
-        />
-        <input
-          type="text"
-          name="name"
-          value={user.name}
-          onChange={(e) => handlerChange(e)}
-        />
-        <input
-          type="text"
-          name="account_name"
-          value={user.account_name}
-          onChange={(e) => handlerChange(e)}
-        />
-        <input
-          type="text"
-          name="email"
-          value={user.email}
-          onChange={(e) => handlerChange(e)}
-        />
-        <input
-          type="password"
-          name="email"
-          value={user.secret}
-          onChange={(e) => handlerChange(e)}
-        />
-        <button className={styles.viewPassword}>
-          <div>
-            <span>Ver contraseña </span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill={{ fill: "#f5f5f5" }}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12ZM14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z"
-                fill="#101010"
+      <div className={styles.center}>
+        <form
+          action=""
+          onSubmit={(e) => {
+            e.preventDefault();
+            submirUser();
+          }}
+        >
+          <span>REGISTRAR USUARIO</span>
+          {user.profile_image !== "" ? (
+            <div className={styles.image}>
+              <img src={user.profile_image} alt="imageUser" />
+            </div>
+          ) : null}
+          <div className={styles.row}>
+            <div className={styles.input}>
+              <label htmlFor="">Imagen de Usuario</label>
+              <div className={styles.container}>
+                <input
+                  type="text"
+                  autoComplete="off"
+                  placeholder="URL de imagen subida"
+                  className={styles.inputImage}
+                  name="URL"
+                  value={URL}
+                  onChange={(e) => setURL(e.target.value)}
+                />
+                <button onClick={() => sendImg()}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "#101010" }}
+                  >
+                    <path d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM13 14v3h-2v-3H8l4-5 4 5h-3z"></path>
+                  </svg>
+                </button>
+              </div>
+              {errors.profile_image ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.profile_image}</p>
+                </div>
+              ) : null}
+            </div>
+            <div className={styles.input}>
+              <label htmlFor="">Nombre</label>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="Nombre"
+                name="name"
+                value={user.name}
+                onChange={(e) => handlerChange(e)}
               />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M12 3C17.5915 3 22.2898 6.82432 23.6219 12C22.2898 17.1757 17.5915 21 12 21C6.40848 21 1.71018 17.1757 0.378052 12C1.71018 6.82432 6.40848 3 12 3ZM12 19C7.52443 19 3.73132 16.0581 2.45723 12C3.73132 7.94186 7.52443 5 12 5C16.4756 5 20.2687 7.94186 21.5428 12C20.2687 16.0581 16.4756 19 12 19Z"
-                fill="#101010"
-              />
-            </svg>
+              {errors.name ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.name}</p>
+                </div>
+              ) : null}
+            </div>
           </div>
-        </button>
-        <input type="submit" />
-      </form>
+          <div className={styles.row}>
+            <div className={styles.input}>
+              <label htmlFor="">Nombre de Usuario</label>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="ejemplo: Nombre2010"
+                name="account_name"
+                value={user.account_name}
+                onChange={(e) => handlerChange(e)}
+              />
+              {errors.account_name ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.account_name}</p>
+                </div>
+              ) : null}
+            </div>
+            <div className={styles.input}>
+              <label htmlFor="">E-mail</label>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="nombre.apellido@email.com"
+                name="email"
+                value={user.email}
+                onChange={(e) => handlerChange(e)}
+              />
+              {errors.email ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.email}</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+          <div className={styles.row}>
+            <div className={styles.input}>
+              <label htmlFor="">Contraseña</label>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="contraseñA1"
+                name="secret"
+                value={user.secret}
+                onChange={(e) => handlerChange(e)}
+              />
+              {errors.secret ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.secret}</p>
+                </div>
+              ) : null}
+            </div>
+            <div className={styles.input}>
+              <label htmlFor="">Confirmar Contraseña</label>
+              <input
+                type="text"
+                autoComplete="off"
+                placeholder="contraseñA1"
+                name="twoName"
+                value={twoName}
+                onChange={(e) => setTwoName(e.target.value)}
+              />
+              {errors.towSeceret ? (
+                <div className={styles.error}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    style={{ fill: "red" }}
+                  >
+                    <path d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z"></path>
+                    <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                  </svg>
+                  <p>{errors.towSeceret}</p>
+                </div>
+              ) : null}
+            </div>
+          </div>
+          <input type="submit" className={styles.created} />
+        </form>
+        <div className={styles.bottom}>
+          <span>REGISTROS DE USUARIOS</span>
+          <div className={styles.cardContainer}>
+            <div className={styles.top}>
+              <span className={styles.image}>Imagen</span>
+              <span className={styles.name}>Nombre</span>
+              <span className={styles.account}>Nombre de usuario</span>
+              <span className={styles.email}>E-mail</span>
+              <span className={styles.id}>Id</span>
+            </div>
+            {users?.map((elem) => (
+              <CardUser
+                name={elem.name}
+                account_name={elem.account_name}
+                id={elem.id}
+                image={elem.profile_image}
+                email={elem.email}
+                key={elem.id}
+              />
+            ))}
+          </div>
+          <div className={styles.paddingbottom}>-</div>
+        </div>
+      </div>
     </div>
   );
 };

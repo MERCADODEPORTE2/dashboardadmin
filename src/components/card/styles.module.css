@@ -13,29 +13,33 @@
 }
 
 .card .center {
-  width: 95%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  font-family: "Sarabun", sans-serif;
+  color: #101010;
 }
 
-.card .center > img {
-  /* background-color: red; */
+.card .center div > img {
   height: 90px;
   width: 90px;
+
+  border-radius: 3px;
   object-fit: cover;
 }
 
-.card .center .actions {
+.card .center .actions > section {
   width: 7.5em;
 
   display: flex;
   justify-content: space-between;
 }
 
-.card .center .actions > button {
+.card .center .actions section > button {
   border: none;
-  padding-top: 5px;
+  padding: 5px 6px 0 6px;
   background-color: #e7e7e7;
   border-radius: 5px;
   cursor: pointer;
@@ -44,11 +48,11 @@
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.card .center .actions > button:active {
+.card .center .actions section > button:active {
   transform: translateY(2px);
 }
 
-.card .center .actions > a {
+.card .center .actions section > a {
   border: none;
   padding: 5px 7px 0 7px;
   background-color: #e7e7e7;
@@ -59,12 +63,8 @@
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.card .center .actions > a:active {
+.card .center .actions section > a:active {
   transform: translateY(2px);
-}
-
-.changes {
-  background-color: green;
 }
 
 .delete {
@@ -76,6 +76,10 @@
 
   position: fixed;
   z-index: 900;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .delete .center {
@@ -115,8 +119,107 @@
   background-color: rgb(255, 60, 60);
 }
 
+.center > span,
+.image,
+.actions {
+  width: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 1px;
+}
+
+@media (max-width: 1020px) {
+  .delete .center {
+    top: 40%;
+    left: 40%;
+  }
+}
+
 @media (max-width: 900px) {
-  .none {
+  .center .none {
     display: none;
+  }
+
+  .delete .center {
+    top: 40%;
+    left: 35%;
+  }
+}
+
+@media (max-width: 600px) {
+  .image {
+    width: 6em;
+    margin-bottom: 1em;
+  }
+  .center > span,
+  .actions {
+    width: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 1px;
+  }
+  .card {
+    height: 16em;
+    width: 12em;
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+  }
+
+  .card .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card .center > img {
+    width: 150px;
+    height: 150px;
+
+    margin-bottom: 5px;
+  }
+
+  .card .center .actions {
+    margin-top: 5px;
+  }
+  .delete .center {
+    top: 40%;
+    left: 30%;
+  }
+}
+
+@media (max-width: 500px) {
+  .delete .center {
+    top: 40%;
+    left: 20%;
+  }
+}
+
+@media (max-width: 400px) {
+  .delete .center {
+    top: 40%;
+    left: 16%;
+  }
+}
+
+@media (max-width: 350px) {
+  .delete .center {
+    top: 35%;
+    left: 10%;
+  }
+}
+
+@media (max-width: 290px) {
+  .delete .center {
+    top: 35%;
+    left: 8%;
   }
 }

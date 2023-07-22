@@ -8,6 +8,9 @@ const Delete = ({ close, id }) => {
   const deleteProduct = () => {
     dispatch(deleteProductById(id));
     close(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
   return (
     <div className={styles.delete}>
