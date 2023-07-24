@@ -1,4 +1,7 @@
 import axios from "axios";
+import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
+import Alert from "../components/alert/alert";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
@@ -53,178 +56,314 @@ export const getProductByID = (id) => {
   };
 };
 
-export const patchProduct = (product) => {
-  return (dispatch) => {
-    return (
-      axios
-        .patch(`products`, product)
-        .then((res) => dispatch({ type: PATCH_PRODUCT, payload: res.data }))
-        // .then((res) => console.log(res))
-        .catch((error) => console.error(error))
+export const patchProduct = (product) => async (dispatch) => {
+  try {
+    // const userData = JSON.parse(window.localStorage.getItem("user"));
+    // const headers = {
+    //   // "secret": userData.secret,
+    //   email: userData.email,
+    // };
+    const productPatch = (
+      await axios.patch(
+        "products",
+        product
+        //  {
+        //   headers,
+        // }
+      )
+    ).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Se ha cambiado con éxito"
+        type="success"
+      />
     );
-  };
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteProductById = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`products/${id}`)
-      .then((res) => dispatch({ type: DELETE_PRODUCT, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const deleteProductById = (id) => async () => {
+  try {
+    const removedProduct = (await axios.delete(`products/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Se ha eliminado con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const createProduct = (product) => {
-  return (dispatch) => {
-    return axios
-      .post(`products`, product)
-      .then((res) => dispatch({ type: POST_PRODUCT, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const createProduct = (product) => async (dispatch) => {
+  try {
+    const newProduct = (await axios.post("products", product)).data;
+    dispatch({ type: POST_PRODUCT, payload: newProduct });
+
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Se ha creado un nuevo producto"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
 // <---------- colors ------------->
 export const getColors = () => {
-  return (dispatch) => {
-    return axios
-      .get(`colors`)
-      .then((res) => dispatch({ type: GET_COLORS, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allColors = (await axios.get("colors")).data;
+      dispatch({ type: GET_COLORS, payload: allColors });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
-export const postColor = (color) => {
-  return (dispatch) => {
-    return axios
-      .post(`colors`, color)
-      .then((res) => dispatch({ type: POST_COLORS, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postColor = (color) => async () => {
+  try {
+    const newColor = (await axios.post("colors", color)).data;
+    // console.log(newColor);
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert title="Success" message="Color creado con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteColor = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`colors/${id}`)
-      .then((res) => dispatch({ type: DELETE_COLOR, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const deleteColor = (id) => async () => {
+  try {
+    const removedColor = (await axios.delete(`colors/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Color eliminado con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
 // <---------- tags ------------->
+
 export const getTags = () => {
-  return (dispatch) => {
-    return axios
-      .get(`tags`)
-      .then((res) => dispatch({ type: GET_TAGS, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allTags = (await axios.get("tags")).data;
+      dispatch({ type: GET_TAGS, payload: allTags });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
-export const postTags = (tag) => {
-  return (dispatch) => {
-    return axios
-      .post(`tags`, tag)
-      .then((res) => dispatch({ type: POST_TAGS, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postTags = (tag) => async () => {
+  try {
+    const newTag = (await axios.post("tags", tag)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Etiqueta creada con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteTags = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`tags/${id}`)
-      .then((res) => dispatch({ type: DELETE_TAG, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const deleteTags = (id) => async () => {
+  try {
+    const removedTag = (await axios.delete(`tags/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Etiqueta eliminada con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
 // <---------- sizes ------------->
+
 export const getSizes = () => {
-  return (dispatch) => {
-    return axios
-      .get(`sizes`)
-      .then((res) => dispatch({ type: GET_SIZES, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allSizes = (await axios.get("sizes")).data;
+      dispatch({ type: GET_SIZES, payload: allSizes });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
-export const postSizes = (size) => {
-  return (dispatch) => {
-    return axios
-      .post(`sizes`, size)
-      .then((res) => dispatch({ type: POST_SIZES, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postSizes = (size) => async () => {
+  try {
+    const newSize = (await axios.post("sizes", size)).data;
+    // console.log(newSize);
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert title="Success" message="Talle creado con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteSizes = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`sizes/${id}`)
-      .then((res) => dispatch({ type: DELETE_SIZE, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const deleteSizes = (id) => async () => {
+  try {
+    const removedSize = (await axios.delete(`sizes/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Talle eliminado con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
 // <--------- IMG --------->
 
 export const getImages = (type) => {
-  return (dispatch) => {
-    return axios
-      .get(`images?q=${type}`)
-      .then((res) => dispatch({ type: GET_IMAGE_CARRUSEL, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allImages = (await axios.get(`images?q=${type}`)).data;
+      dispatch({ type: GET_IMAGE_CARRUSEL, payload: allImages });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
-export const postImages = (img) => {
-  return (dispatch) => {
-    return axios
-      .post(`images`, img)
-      .then((res) => dispatch({ type: POST_IMAGE_CARRUSEL, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postImages = (img) => async () => {
+  try {
+    const newIMG = (await axios.post("images", img)).data;
+    // console.log(newColor);
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert title="Success" message="Subida con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteImages = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`images/${id}`)
-      .then((res) =>
-        dispatch({ type: DELETE_IMAGE_CARRUSEL, payload: res.data })
-      )
-      .catch((error) => console.error(error));
-  };
+export const deleteImages = (id) => async () => {
+  try {
+    const removedImages = (await axios.delete(`images/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Imagen eliminada con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-// <------------------->
-
-export const postFAQS = (faq) => {
-  return (dispatch) => {
-    return axios
-      .post(`faqs`, faq)
-      .then((res) => dispatch({ type: POST_FAQS, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
-};
+// <--------- FAQS ---------->
 
 export const getFaqs = () => {
-  return (dispatch) => {
-    return axios
-      .get(`faqs`)
-      .then((res) => dispatch({ type: GET_FAQS, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allFAQS = (await axios.get("faqs")).data;
+      dispatch({ type: GET_FAQS, payload: allFAQS });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
-export const deleteFaqs = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`faqs/${id}`)
-      .then((res) => dispatch({ type: DELETE_FAQ, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postFAQS = (faq) => async () => {
+  try {
+    const newFaq = (await axios.post("faqs", faq)).data;
+    // console.log(newColor);
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert title="Success" message="FAQ creada con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
+};
+
+export const deleteFaqs = (id) => async () => {
+  try {
+    const removedFAQ = (await axios.delete(`faqs/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert title="Success" message="FAQ eliminada con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
 // <--------->
@@ -244,47 +383,68 @@ export const filter = (payload) => ({
   payload,
 });
 
-// <--------->
+// <---------- USERS --------->
 
 export const getUsers = () => {
-  return (dispatch) => {
-    return axios
-      .get(`user`)
-      .then((res) => dispatch({ type: GET_USERS, payload: res.data }))
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const allUsers = (await axios.get("user")).data;
+      dispatch({ type: GET_USERS, payload: allUsers });
+    } catch (error) {
+      console.error(error);
+    }
   };
 };
 
 export const checkUser = (secret, email) => {
-  return (dispatch) => {
-    return axios
-      .get(`user/${secret}/${email}`)
-      .then((res) =>
-        // console.log(res.data)
-        dispatch({ type: GET_CHECK_USER, payload: res.data })
-      )
-      .catch((error) => console.error(error));
+  return async (dispatch) => {
+    try {
+      const check = (await axios.get(`user/${secret}/${email}`)).data;
+      dispatch({ type: GET_CHECK_USER, payload: check });
+    } catch (error) {
+      ReactDOM.render(
+        <Alert title="Error" message={error} type="danger" />,
+        document.getElementById("alert")
+      );
+    }
   };
 };
 
-export const postUsers = (user) => {
-  return (dispatch) => {
-    return axios
-      .post(`user`, user)
-      .then((res) => dispatch({ type: POST_USER, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
+export const postUsers = (user) => async (dispatch) => {
+  try {
+    const newUser = (await axios.post("user", user)).data;
+    dispatch({ type: POST_USER, payload: newUser });
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Usuario creado con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };
 
-export const deleteUsers = (id) => {
-  return (dispatch) => {
-    return axios
-      .delete(`user/${id}`)
-      .then((res) => dispatch({ type: DELETE_USER, payload: res.data }))
-      .catch((error) => console.error(error));
-  };
-};
-
-export const outSesion = () => {
-  console.log("aaaaaaaaa");
+export const deleteUsers = (id) => async () => {
+  try {
+    const removedUser = (await axios.delete(`user/${id}`)).data;
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Success"
+        message="Usuario eliminado con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
 };

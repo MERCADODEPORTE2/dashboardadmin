@@ -234,10 +234,9 @@ const Create = (props) => {
       setSelectedColors([]);
       setSelectedSizes([]);
       setSelectedTags([]);
-      setTimeout(() => {
-        window.location.reload();
-        window.location.href = "/";
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.href = "/home";
+      // }, 2000);
     } else {
       alert("completar sin errores");
     }

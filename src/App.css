@@ -6,3 +6,12 @@
 .App {
   background-color: #f5f5f5;
 }
+
+/* .alert {
+  position: sticky;
+  bottom: 3em;
+  left: 75%;
+  width: 300px;
+  height: 40px;
+  z-index: 100000;
+} */

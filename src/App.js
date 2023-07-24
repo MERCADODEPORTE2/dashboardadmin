@@ -74,6 +74,7 @@ function App() {
       {/* <Route exact path="/login/user">
         <Login />
       </Route> */}
+      <div id="alert" className="alert"></div>
     </div>
   );
 }

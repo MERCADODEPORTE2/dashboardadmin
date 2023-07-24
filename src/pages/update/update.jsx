@@ -287,9 +287,9 @@ const Update = ({ id }) => {
         colors: [], //
       });
       setTimeout(() => {
-        window.location.reload();
+        // window.location.reload();
         window.location.href = `/detail/${id}`;
-      }, 1000);
+      }, 3000);
     }
   };
 

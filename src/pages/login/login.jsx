@@ -4,9 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles.module.css";
 
-const validateError = () => {
+const validateError = (validate, user) => {
   let errors = {};
-  errors.email = "Información invalida";
+  if (!validate.email || !validate.secret) {
+    errors.email = "falta informacion";
+  } else if (
+    validate.email !== user?.email ||
+    validate.secret !== user?.secret
+  ) {
+    errors.email = "Información Invalida";
+  } else {
+    errors.email = null;
+  }
   return errors;
 };
 
@@ -31,7 +40,8 @@ const Login = () => {
     });
   };
 
-  const submitValidate = () => {
+  const submitValidate = (e) => {
+    e.preventDefault();
     dispatch(checkUser(validate.secret, validate.email));
     let user = users[0];
 
@@ -48,10 +58,13 @@ const Login = () => {
       window.location.href = `/home`;
     } else {
       setErrors(
-        validateError({
-          ...validate,
-          email: validate.email,
-        })
+        validateError(
+          {
+            ...validate,
+            email: validate.email,
+          },
+          user
+        )
       );
     }
   };
@@ -67,13 +80,7 @@ const Login = () => {
           src="https://i.ibb.co/XxKd25d/Picsart-23-06-13-16-44-51-813.png"
           alt="md"
         />
-        <form
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            submitValidate();
-          }}
-        >
+        <form action="" onSubmit={(e) => {}}>
           <div>
             <label htmlFor="">E-mail</label>
             <input
@@ -113,7 +120,10 @@ const Login = () => {
           {!viewSecret ? (
             <button
               className={styles.viewPassword}
-              onClick={() => setViewSecret(true)}
+              onClick={(e) => {
+                e.preventDefault();
+                setViewSecret(true);
+              }}
             >
               <div>
                 <svg
@@ -142,7 +152,10 @@ const Login = () => {
           ) : (
             <button
               className={styles.viewPassword}
-              onClick={() => setViewSecret(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setViewSecret(false);
+              }}
             >
               <div>
                 <svg
@@ -182,7 +195,7 @@ const Login = () => {
               <p> · {errors.email}</p>
             </div>
           ) : null}
-          <button type="submit" className={styles.send}>
+          <button onClick={(e) => submitValidate(e)} className={styles.send}>
             Iniciar Sesión
           </button>
         </form>

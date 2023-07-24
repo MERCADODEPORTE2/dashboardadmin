@@ -11,9 +11,9 @@ const CardUser = ({ name, account_name, id, email, image }) => {
   const deleteProduct = () => {
     dispatch(deleteUsers(id));
     setOpen(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   };
 
   return (
