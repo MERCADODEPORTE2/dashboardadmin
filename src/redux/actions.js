@@ -448,3 +448,38 @@ export const deleteUsers = (id) => async () => {
     );
   }
 };
+
+export const getImageUrl = (imageStr, setInput, input, name) => {
+  let str = "";
+  return async () => {
+    try {
+      const result = (
+        await axios.post("/processImage/post", {
+          imageStr,
+        })
+      ).data;
+      if (result) {
+        str = result;
+        if (!name) {
+          setInput({
+            ...input,
+            image: [...input.image, str],
+          });
+        } else {
+          setInput({
+            ...input,
+            profile_image: str,
+          });
+        }
+
+        str = "";
+      }
+      return result;
+    } catch (error) {
+      ReactDOM.render(
+        <Alert title="Error" message={error} type="danger" />,
+        document.getElementById("alert")
+      );
+    }
+  };
+};

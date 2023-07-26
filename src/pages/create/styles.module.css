@@ -16,6 +16,30 @@
 
   background-color: #f5f5f5;
 }
+.addImagesChanges {
+  min-height: 6em;
+  width: 100%;
+  min-width: 12em;
+  max-width: 20em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 0 0 5px 5px;
+  background-color: #f5f5f5;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.addImagesChanges > span {
+  margin-bottom: 3px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+}
 /* <----------- START -----------> */
 .input {
   width: 20em;

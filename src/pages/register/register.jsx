@@ -3,6 +3,7 @@ import { postUsers, getUsers } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import CardUser from "./cardUser";
+import TypeFile from "../../components/file/file";
 import styles from "./styles.module.css";
 
 const validate = (user, twoName) => {
@@ -40,7 +41,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
-  const [URL, setURL] = useState("");
   const [twoName, setTwoName] = useState("");
   const [errors, setErrors] = useState({});
   const [user, setUser] = useState({
@@ -57,13 +57,6 @@ const Register = () => {
     }
   }, [users, dispatch]);
 
-  const sendImg = () => {
-    setUser({
-      ...user,
-      profile_image: URL,
-    });
-    setURL("");
-  };
   const handlerChange = (e) => {
     const value = e.target.value;
     const property = e.target.name;
@@ -113,28 +106,7 @@ const Register = () => {
           <div className={styles.row}>
             <div className={styles.input}>
               <label htmlFor="">Imagen de Usuario</label>
-              <div className={styles.container}>
-                <input
-                  type="text"
-                  autoComplete="off"
-                  placeholder="URL de imagen subida"
-                  className={styles.inputImage}
-                  name="URL"
-                  value={URL}
-                  onChange={(e) => setURL(e.target.value)}
-                />
-                <button onClick={() => sendImg()}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    style={{ fill: "#101010" }}
-                  >
-                    <path d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM13 14v3h-2v-3H8l4-5 4 5h-3z"></path>
-                  </svg>
-                </button>
-              </div>
+              <TypeFile input={user} setInput={setUser} name={"name"} />
               {errors.profile_image ? (
                 <div className={styles.error}>
                   <svg

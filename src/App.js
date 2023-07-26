@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Route, useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
-
 import {
   Home,
   Detail,
@@ -15,7 +14,8 @@ import {
 } from "./pages/index";
 import { NavBar, LateralBar } from "./components/index";
 
-axios.defaults.baseURL = "https://back-production-c55d.up.railway.app/";
+// axios.defaults.baseURL = "https://back-production-c55d.up.railway.app/";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const location = useLocation();

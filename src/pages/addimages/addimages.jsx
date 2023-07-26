@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getImages, postImages, deleteImages } from "../../redux/actions";
 import Input from "./input";
+import TypeFile from "../../components/file/file";
 
 import styles from "./styles.module.css";
 
@@ -118,7 +119,15 @@ const AddImages = () => {
   return (
     <div className={styles.addimages}>
       <div className={styles.center}>
-        <Input
+        <span>url de imagen PC</span>
+        <TypeFile input={imagePC} setInput={setImagePC} name={"images"} />
+        <br />
+        <span>url de imagen TB</span>
+        <TypeFile input={imageTB} setInput={setImageTB} name={"images"} />
+        <br />
+        <span>url de imagen MV</span>
+        <TypeFile input={imageMV} setInput={setImageMV} name={"images"} />
+        {/* <Input
           label={"PC"}
           open={imagePC.open}
           nameOpen={"open"}
@@ -131,8 +140,8 @@ const AddImages = () => {
           arrImg={imagePC.image}
           remove={removeImgPC}
           send={send}
-        />
-        <Input
+        /> */}
+        {/* <Input
           label={"TB"}
           open={imageTB.open}
           nameOpen={"open"}
@@ -159,7 +168,7 @@ const AddImages = () => {
           arrImg={imageMV.image}
           remove={removeImgMV}
           send={send}
-        />
+        /> */}
       </div>
       <div className={styles.centerBottom}>
         <span>IMAGENES DE LA BASE DE DATOS</span>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getColors,
@@ -7,13 +8,16 @@ import {
   createProduct,
 } from "../../redux/actions";
 
+import Alert from "../../components/alert/alert";
 import Input from "./input";
 import Select from "./select";
 import TextArea from "./textArea";
 import SelectSTR from "./selectStr";
+import TypeFile from "../../components/file/file";
 
 import styles from "../update/styles.module.css";
 import style from "./styles.module.css";
+import Loader from "../../components/file/loader";
 
 const validate = (input) => {
   let errors = {};
@@ -172,18 +176,6 @@ const Create = (props) => {
     setSelectedSizes(selectedSizes.filter((elem) => elem.id !== id));
   };
 
-  const [url, setUrl] = useState("");
-  const handleImageInputChange = (e) => {
-    e.preventDefault();
-    if (!url || /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/.test(url)) {
-      setInput({
-        ...input,
-        image: [...input.image, url],
-      });
-      setUrl("");
-    }
-  };
-
   const selectCategory = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -234,11 +226,11 @@ const Create = (props) => {
       setSelectedColors([]);
       setSelectedSizes([]);
       setSelectedTags([]);
-      // setTimeout(() => {
-      //   window.location.href = "/home";
-      // }, 2000);
     } else {
-      alert("completar sin errores");
+      ReactDOM.render(
+        <Alert title="Error" message="Completar sin errores" type="danger" />,
+        document.getElementById("alert")
+      );
     }
   };
 
@@ -267,34 +259,13 @@ const Create = (props) => {
                 ))}
               </div>
             ) : null}
-            <div className={styles.addImagesChanges}>
+            <div className={style.addImagesChanges}>
               <span>Imagenes</span>
-              <form action="">
-                <input
-                  type="text"
-                  placeholder="URL de imagen subida"
-                  className={styles.inputs}
-                  name="url"
-                  value={url}
-                  autoComplete="off"
-                  onChange={(e) => setUrl(e.target.value)}
-                  // hidden={path === "update"}
-                />
-                <button
-                  className={styles.post}
-                  onClick={(e) => handleImageInputChange(e)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    style={{ fill: "#101010" }}
-                  >
-                    <path d="M18.944 11.112C18.507 7.67 15.56 5 12 5 9.244 5 6.85 6.611 5.757 9.15 3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888zM13 14v3h-2v-3H8l4-5 4 5h-3z"></path>
-                  </svg>
-                </button>
-              </form>
+              <TypeFile
+                setInput={setInput}
+                input={input}
+                inputProp={input.image}
+              />
             </div>
             {errors.image ? (
               <div className={styles.error}>
