@@ -25,12 +25,14 @@
 
 .topOn {
   width: 100%;
+  height: auto;
 
   margin-top: 2em;
 
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .containerFilters {
@@ -99,9 +101,6 @@
 }
 
 @media (max-width: 1290px) {
-  /* .filters {
-    width: 0%;
-  } */
   .topOff {
     width: 90%;
     height: auto;

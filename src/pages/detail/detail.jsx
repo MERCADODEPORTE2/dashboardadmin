@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getProductByID } from "../../redux/actions";
 
-import Carrusel from "../../components/carrusel/carrusel";
+import { getProductByID } from "../../redux/actions";
+import { Carrusel } from "../../components";
 
 import styles from "./styles.module.css";
 

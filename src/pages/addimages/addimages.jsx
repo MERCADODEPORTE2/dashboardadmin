@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getImages, postImages, deleteImages } from "../../redux/actions";
-import Input from "./input";
-import TypeFile from "../../components/file/file";
+import { TypeFile } from "../../components/index";
 
 import styles from "./styles.module.css";
 
@@ -22,18 +22,6 @@ const AddImages = () => {
     open: false,
   });
 
-  const [urlPC, setUrlPC] = useState("");
-  const handleImagePC = (label) => {
-    if (urlPC !== "") {
-      setImagePC({
-        ...imagePC,
-        image: [...imagePC.image, urlPC],
-        name: label,
-      });
-      setUrlPC("");
-    }
-  };
-
   const removeImgPC = (img) => {
     setImagePC({
       ...imagePC,
@@ -48,18 +36,6 @@ const AddImages = () => {
     image: [],
     open: false,
   });
-
-  const [urlTB, setUrlTB] = useState("");
-  const handleImageTB = (label) => {
-    if (urlTB !== "") {
-      setImageTB({
-        ...imageTB,
-        image: [...imageTB.image, urlTB],
-        name: label,
-      });
-      setUrlTB("");
-    }
-  };
 
   const removeImgTB = (img) => {
     setImageTB({
@@ -76,18 +52,6 @@ const AddImages = () => {
     open: false,
   });
 
-  const [urlMV, setUrlMV] = useState("");
-  const handleImageMV = (label) => {
-    if (urlMV !== "") {
-      setImageMV({
-        ...imageMV,
-        image: [...imageMV.image, urlMV],
-        name: label,
-      });
-      setUrlMV("");
-    }
-  };
-
   const removeImgMV = (img) => {
     setImageMV({
       ...imageMV,
@@ -95,10 +59,10 @@ const AddImages = () => {
     });
   };
 
-  const send = (state, setState) => {
+  const send = (state, setState, name) => {
     let img = {};
-    if (state.image.length !== 0 && state.name !== "") {
-      img.name = state.name;
+    if (state.image.length !== 0 && name !== "") {
+      img.name = name;
       img.image = state.image;
       dispatch(postImages(img));
       setState({
@@ -111,64 +75,94 @@ const AddImages = () => {
 
   const remove = (id) => {
     dispatch(deleteImages(id));
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
   };
 
   return (
     <div className={styles.addimages}>
       <div className={styles.center}>
-        <span>url de imagen PC</span>
-        <TypeFile input={imagePC} setInput={setImagePC} name={"images"} />
+        <div className={styles.containerImageType}>
+          <span>Imagen PC</span>
+          <TypeFile input={imagePC} setInput={setImagePC} />
+          <button onClick={() => send(imagePC, setImagePC, "PC")}>
+            <span>SUBIR</span>
+          </button>
+          {!imagePC.image.length ? null : (
+            <div className={styles.bottom}>
+              {imagePC.image?.map((img, i) => (
+                <div key={i} className={styles.image}>
+                  <img src={img} alt={img} width={100} height={120} />
+                  <div onClick={() => removeImgPC(img)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      style={{ fill: "#101010" }}
+                    >
+                      <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <br />
-        <span>url de imagen TB</span>
-        <TypeFile input={imageTB} setInput={setImageTB} name={"images"} />
+        <div className={styles.containerImageType}>
+          <span>Imagen TB</span>
+          <TypeFile input={imageTB} setInput={setImageTB} />
+          <button onClick={() => send(imageTB, setImageTB, "TB")}>
+            <span>SUBIR</span>
+          </button>
+          {!imageTB.image.length ? null : (
+            <div className={styles.bottom}>
+              {imageTB.image?.map((img, i) => (
+                <div key={i} className={styles.image}>
+                  <img src={img} alt={img} width={100} height={120} />
+                  <div onClick={() => removeImgTB(img)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      style={{ fill: "#101010" }}
+                    >
+                      <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <br />
-        <span>url de imagen MV</span>
-        <TypeFile input={imageMV} setInput={setImageMV} name={"images"} />
-        {/* <Input
-          label={"PC"}
-          open={imagePC.open}
-          nameOpen={"open"}
-          state={imagePC}
-          setOpen={setImagePC}
-          url={urlPC}
-          nameURL={"urlPC"}
-          setUrl={setUrlPC}
-          handleImageInputChange={handleImagePC}
-          arrImg={imagePC.image}
-          remove={removeImgPC}
-          send={send}
-        /> */}
-        {/* <Input
-          label={"TB"}
-          open={imageTB.open}
-          nameOpen={"open"}
-          state={imageTB}
-          setOpen={setImageTB}
-          url={urlTB}
-          nameURL={"urlTB"}
-          setUrl={setUrlTB}
-          handleImageInputChange={handleImageTB}
-          arrImg={imageTB.image}
-          remove={removeImgTB}
-          send={send}
-        />
-        <Input
-          label={"MV"}
-          open={imageMV.open}
-          nameOpen={"open"}
-          state={imageMV}
-          setOpen={setImageMV}
-          url={urlMV}
-          nameURL={"urlMV"}
-          setUrl={setUrlMV}
-          handleImageInputChange={handleImageMV}
-          arrImg={imageMV.image}
-          remove={removeImgMV}
-          send={send}
-        /> */}
+        <div className={styles.containerImageType}>
+          <span>Imagen MV</span>
+          <TypeFile input={imageMV} setInput={setImageMV} />
+          <button onClick={() => send(imageMV, setImageMV, "MV")}>
+            <span>SUBIR</span>
+          </button>
+          {!imageMV.image.length ? null : (
+            <div className={styles.bottom}>
+              {imageMV.image?.map((img, i) => (
+                <div key={i} className={styles.image}>
+                  <img src={img} alt={img} width={100} height={120} />
+                  <div onClick={() => removeImgMV(img)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      style={{ fill: "#101010" }}
+                    >
+                      <path d="m16.192 6.344-4.243 4.242-4.242-4.242-1.414 1.414L10.535 12l-4.242 4.242 1.414 1.414 4.242-4.242 4.243 4.242 1.414-1.414L13.364 12l4.242-4.242z"></path>
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.centerBottom}>
         <span>IMAGENES DE LA BASE DE DATOS</span>

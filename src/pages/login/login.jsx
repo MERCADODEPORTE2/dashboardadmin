@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { checkUser } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
+import { checkUser } from "../../redux/actions";
 import styles from "./styles.module.css";
 
 const validateError = (validate, user) => {

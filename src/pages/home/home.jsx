@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, getTags, getColors, getSizes } from "../../redux/actions";
 
-import Container from "../../components/container/container";
-import Pages from "../../components/paginated/paginated";
+import { getProducts, getTags, getColors, getSizes } from "../../redux/actions";
+import { Container, Page } from "../../components";
 
 import styles from "./styles.module.css";
 
@@ -48,7 +47,7 @@ const Home = () => {
         setOrder={setOrder}
         products={currentPosts}
       />
-      <Pages
+      <Page
         totalPosts={products.length}
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}

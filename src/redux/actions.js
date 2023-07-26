@@ -1,7 +1,7 @@
-import axios from "axios";
-import { createRoot } from "react-dom/client";
 import ReactDOM from "react-dom";
-import Alert from "../components/alert/alert";
+import { createRoot } from "react-dom/client";
+import { Alert } from "../components/index";
+import axios from "axios";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
@@ -60,7 +60,7 @@ export const patchProduct = (product) => async (dispatch) => {
   try {
     // const userData = JSON.parse(window.localStorage.getItem("user"));
     // const headers = {
-    //   // "secret": userData.secret,
+    //   "secret": userData.secret,
     //   email: userData.email,
     // };
     const productPatch = (
@@ -75,7 +75,7 @@ export const patchProduct = (product) => async (dispatch) => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Se ha cambiado con éxito"
         type="success"
       />
@@ -93,11 +93,7 @@ export const deleteProductById = (id) => async () => {
     const removedProduct = (await axios.delete(`products/${id}`)).data;
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert
-        title="Success"
-        message="Se ha eliminado con éxito"
-        type="success"
-      />
+      <Alert title="Exitoso" message="Se ha eliminado con éxito" type="alert" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -115,7 +111,7 @@ export const createProduct = (product) => async (dispatch) => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Se ha creado un nuevo producto"
         type="success"
       />
@@ -146,7 +142,7 @@ export const postColor = (color) => async () => {
     // console.log(newColor);
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert title="Success" message="Color creado con éxito" type="success" />
+      <Alert title="Exitoso" message="Color creado con éxito" type="success" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -161,11 +157,7 @@ export const deleteColor = (id) => async () => {
     const removedColor = (await axios.delete(`colors/${id}`)).data;
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert
-        title="Success"
-        message="Color eliminado con éxito"
-        type="success"
-      />
+      <Alert title="Exitoso" message="Color eliminado con éxito" type="alert" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -194,7 +186,7 @@ export const postTags = (tag) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Etiqueta creada con éxito"
         type="success"
       />
@@ -213,9 +205,9 @@ export const deleteTags = (id) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Etiqueta eliminada con éxito"
-        type="success"
+        type="alert"
       />
     );
   } catch (error) {
@@ -245,7 +237,7 @@ export const postSizes = (size) => async () => {
     // console.log(newSize);
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert title="Success" message="Talle creado con éxito" type="success" />
+      <Alert title="Exitoso" message="Talle creado con éxito" type="success" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -260,11 +252,7 @@ export const deleteSizes = (id) => async () => {
     const removedSize = (await axios.delete(`sizes/${id}`)).data;
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert
-        title="Success"
-        message="Talle eliminado con éxito"
-        type="success"
-      />
+      <Alert title="Exitoso" message="Talle eliminado con éxito" type="alert" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -293,7 +281,7 @@ export const postImages = (img) => async () => {
     // console.log(newColor);
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert title="Success" message="Subida con éxito" type="success" />
+      <Alert title="Exitoso" message="IMG Subida con éxito" type="success" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -309,9 +297,9 @@ export const deleteImages = (id) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Imagen eliminada con éxito"
-        type="success"
+        type="alert"
       />
     );
   } catch (error) {
@@ -341,7 +329,7 @@ export const postFAQS = (faq) => async () => {
     // console.log(newColor);
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert title="Success" message="FAQ creada con éxito" type="success" />
+      <Alert title="Exitoso" message="FAQ creada con éxito" type="success" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -356,7 +344,7 @@ export const deleteFaqs = (id) => async () => {
     const removedFAQ = (await axios.delete(`faqs/${id}`)).data;
     const root = createRoot(document.getElementById("alert"));
     root.render(
-      <Alert title="Success" message="FAQ eliminada con éxito" type="success" />
+      <Alert title="Exitoso" message="FAQ eliminada con éxito" type="alert" />
     );
   } catch (error) {
     ReactDOM.render(
@@ -417,7 +405,7 @@ export const postUsers = (user) => async (dispatch) => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Usuario creado con éxito"
         type="success"
       />
@@ -436,9 +424,9 @@ export const deleteUsers = (id) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert
-        title="Success"
+        title="Exitoso"
         message="Usuario eliminado con éxito"
-        type="success"
+        type="alert"
       />
     );
   } catch (error) {

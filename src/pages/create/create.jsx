@@ -8,16 +8,15 @@ import {
   createProduct,
 } from "../../redux/actions";
 
-import Alert from "../../components/alert/alert";
+import { Alert, TypeFile } from "../../components/index";
+
 import Input from "./input";
 import Select from "./select";
 import TextArea from "./textArea";
 import SelectSTR from "./selectStr";
-import TypeFile from "../../components/file/file";
 
 import styles from "../update/styles.module.css";
 import style from "./styles.module.css";
-import Loader from "../../components/file/loader";
 
 const validate = (input) => {
   let errors = {};

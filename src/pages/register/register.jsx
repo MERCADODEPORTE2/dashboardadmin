@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { postUsers, getUsers } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
+import { postUsers, getUsers } from "../../redux/actions";
+
+import { TypeFile } from "../../components";
 import CardUser from "./cardUser";
-import TypeFile from "../../components/file/file";
 import styles from "./styles.module.css";
 
 const validate = (user, twoName) => {

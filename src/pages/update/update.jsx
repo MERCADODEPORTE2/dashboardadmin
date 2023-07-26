@@ -7,12 +7,12 @@ import {
   getTags,
   getSizes,
 } from "../../redux/actions";
+import { TypeFile } from "../../components/index";
 
 import Box from "./boxes";
 import TextArea from "./textArea";
 import SelectSTR from "./selectStr";
 import Select from "./selectsArr";
-import TypeFile from "../../components/file/file";
 
 import styles from "./styles.module.css";
 
@@ -215,15 +215,6 @@ const Update = ({ id }) => {
   // -----------------------------
 
   // <---------- Images ----------->
-  const [url, setUrl] = useState("");
-  const handleImageInputChange = () => {
-    setInput({
-      ...input,
-      image: [...input.image, url],
-    });
-    setUrl("");
-  };
-
   const clearImages = () => {
     setInput({
       ...input,
@@ -273,19 +264,19 @@ const Update = ({ id }) => {
       }
       dispatch(patchProduct(objectSend));
       setInput({
-        name: "", //
-        category: "", //
+        name: "",
+        category: "",
         stock: "",
-        detail: "", //
-        description: "", //
+        detail: "",
+        description: "",
         price: "",
-        brand: "", //
-        score: "", //
-        genre: "", //
+        brand: "",
+        score: "",
+        genre: "",
         image: [],
-        sizes: [], //
-        tags: [], //
-        colors: [], //
+        sizes: [],
+        tags: [],
+        colors: [],
       });
       setTimeout(() => {
         // window.location.reload();

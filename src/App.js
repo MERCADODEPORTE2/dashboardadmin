@@ -14,8 +14,8 @@ import {
 } from "./pages/index";
 import { NavBar, LateralBar } from "./components/index";
 
-// axios.defaults.baseURL = "https://back-production-c55d.up.railway.app/";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://back-production-c55d.up.railway.app/";
+// axios.defaults.baseURL = "http://localhost:3001/";
 
 function App() {
   const location = useLocation();
