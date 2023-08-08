@@ -232,6 +232,7 @@ const Update = ({ id }) => {
 
   // ---------- opens -------------
   const [openName, setOpenName] = useState(false);
+  const [openPrice, setOpenPrice] = useState(false);
   const [openCategory, setOpenCategory] = useState(false);
   const [openDetail, setOpenDetail] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
@@ -500,6 +501,17 @@ const Update = ({ id }) => {
             clear={clearTagsArr}
           />
         </div>
+        <Box
+          input={input}
+          nameInput={"price"}
+          inputProperty={input.price}
+          setInput={setInput}
+          productByIDProperty={productByID.price}
+          open={openPrice}
+          setOpen={setOpenPrice}
+          handlerChange={handlerChange}
+          errorName={errors.price}
+        />
         <button className={styles.send} onClick={() => submitPatchProduct()}>
           CAMBIAR
         </button>

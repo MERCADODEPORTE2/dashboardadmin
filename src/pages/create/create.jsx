@@ -51,6 +51,9 @@ const validate = (input) => {
   if (!input.state) {
     errors.state = "el producto debe tener una descripción";
   }
+  if (!input.price) {
+    errors.price = "debe haber una cantidad minima para venta";
+  }
   return errors;
 };
 
@@ -64,7 +67,7 @@ const Create = (props) => {
   const [input, setInput] = useState({
     name: "", //
     category: "", //
-    price: "000",
+    price: "",
     stock: "000",
     detail: "", //
     description: "", //
@@ -197,6 +200,7 @@ const Create = (props) => {
       Object.keys(errors).length === 0 &&
       input.name !== "" &&
       input.category !== "" &&
+      input.price !== "" &&
       input.detail !== "" &&
       input.description !== "" &&
       input.brand !== "" &&
@@ -210,7 +214,7 @@ const Create = (props) => {
         name: "",
         category: "",
         detail: "",
-        price: "000",
+        price: "",
         stock: "000",
         description: "",
         brand: "",
@@ -367,6 +371,13 @@ const Create = (props) => {
             errorProp={errors.description}
           />
         </div>
+        <Input
+          inputProperty={input.price}
+          nameInput={"price"}
+          handlerChange={handlerChange}
+          placeholder={"cantidad minima"}
+          errorProp={errors.price}
+        />
         <button onClick={handlerSubmit} className={style.create}>
           CREAR
         </button>
