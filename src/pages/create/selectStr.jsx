@@ -15,6 +15,9 @@ const SelectSTR = ({ nameInput, inputProperty, selectCategory, errorProp }) => {
         >
           {nameInput === "category" ? (
             <>
+              <option defaultValue="options" value="none">
+                opciones
+              </option>
               <option value="ropa">Ropa</option>
               <option value="accesorio">Accesorio</option>
               <option value="deportes">Deportes</option>
@@ -22,11 +25,17 @@ const SelectSTR = ({ nameInput, inputProperty, selectCategory, errorProp }) => {
             </>
           ) : nameInput === "state" ? (
             <>
+              <option defaultValue="options" value="none">
+                opciones
+              </option>
               <option value="nuevo">Nuevo</option>
-              <option value="nuevo">Antiguo</option>
+              <option value="antiguo">Antiguo</option>
             </>
           ) : (
             <>
+              <option defaultValue="options" value="none">
+                opciones
+              </option>
               <option value="mujer">Mujer</option>
               <option value="hombre">Hombre</option>
               <option value="unisex">Unisex</option>
