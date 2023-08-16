@@ -15,6 +15,9 @@ export const GET_SIZES = "GET_SIZES";
 export const POST_COLORS = "POST_COLORS";
 export const POST_TAGS = "POST_TAGS";
 export const POST_SIZES = "POST_SIZES";
+export const PATCH_TAGS = "PATCH_TAGS";
+export const PATCH_COLORS = "PATCH_COLORS";
+export const PATCH_SIZES = "PATCH_SIZES";
 export const DELETE_COLOR = "DELETE_COLOR";
 export const DELETE_TAG = "DELETE_TAG";
 export const DELETE_SIZE = "DELETE_SIZE";
@@ -56,7 +59,7 @@ export const getProductByID = (id) => {
   };
 };
 
-export const patchProduct = (product) => async (dispatch) => {
+export const patchProduct = (product) => async () => {
   try {
     // const userData = JSON.parse(window.localStorage.getItem("user"));
     // const headers = {
@@ -124,7 +127,7 @@ export const createProduct = (product) => async (dispatch) => {
   }
 };
 
-// <---------- colors ------------->
+// <---------- colors ------------>
 export const getColors = () => {
   return async (dispatch) => {
     try {
@@ -143,6 +146,26 @@ export const postColor = (color) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert title="Exitoso" message="Color creado con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
+};
+
+export const updateColors = (color) => async () => {
+  try {
+    const update = (await axios.patch("colors", color)).data;
+    //
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Exitoso"
+        message="Color cambiado con éxito"
+        type="success"
+      />
     );
   } catch (error) {
     ReactDOM.render(
@@ -199,6 +222,26 @@ export const postTags = (tag) => async () => {
   }
 };
 
+export const updateTags = (tag) => async () => {
+  try {
+    const update = (await axios.patch("tags", tag)).data;
+    //
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Exitoso"
+        message="Etiqueta cambiada con éxito"
+        type="success"
+      />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
+};
+
 export const deleteTags = (id) => async () => {
   try {
     const removedTag = (await axios.delete(`tags/${id}`)).data;
@@ -238,6 +281,26 @@ export const postSizes = (size) => async () => {
     const root = createRoot(document.getElementById("alert"));
     root.render(
       <Alert title="Exitoso" message="Talle creado con éxito" type="success" />
+    );
+  } catch (error) {
+    ReactDOM.render(
+      <Alert title="Error" message={error} type="danger" />,
+      document.getElementById("alert")
+    );
+  }
+};
+
+export const updateSizes = (size) => async () => {
+  try {
+    const update = (await axios.patch("sizes", size)).data;
+    //
+    const root = createRoot(document.getElementById("alert"));
+    root.render(
+      <Alert
+        title="Exitoso"
+        message="Talle cambiado con éxito"
+        type="success"
+      />
     );
   } catch (error) {
     ReactDOM.render(

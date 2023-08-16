@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 // import DeleteItem from "./delete";
 
@@ -13,9 +13,10 @@ const Items = ({
   handlerChange,
   send,
   remove,
-  // opeenn,
-  // setOpen,
+  update,
 }) => {
+  const [newName, setNewName] = useState("");
+  const [id, setId] = useState("");
   return (
     <div className={styles.item}>
       <div className={styles.top}>
@@ -27,14 +28,8 @@ const Items = ({
       {state?.map((elem, i) =>
         nameInput === "color" || nameInput === "tags" ? (
           <div key={i} className={styles.option}>
-            {/* {opeenn === false ? null : (
-              <DeleteItem
-                nameInput={nameInput}
-                id={elem.id}
-                setOpen={setOpen}
-                remove={remove}
-              />
-            )} */}
+            <span>id: {elem.id}</span>
+            <span>nombre: {elem.name}</span>
             <button onClick={() => remove(elem.id)} className={styles.remove}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,19 +42,11 @@ const Items = ({
                 <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
               </svg>
             </button>
-            <span>nombre: {elem.name}</span>
-            <span>id: {elem.id}</span>
           </div>
         ) : (
           <div key={i} className={styles.option}>
-            {/* {!opeenn ? null : (
-              <DeleteItem
-                nameInput={nameInput}
-                id={elem.id}
-                setOpen={setOpen}
-                remove={remove}
-              />
-            )} */}
+            <span>id: {elem.id}</span>
+            <span>talle: {elem.size}</span>
             <button onClick={() => remove(elem.id)} className={styles.remove}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -72,11 +59,39 @@ const Items = ({
                 <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
               </svg>
             </button>
-            <span>talle: {elem.size}</span>
-            <span>id: {elem.id}</span>
           </div>
         )
       )}
+      <div className={styles.containerInput}>
+        <input
+          type="text"
+          placeholder="id"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+          className={styles.id}
+        />
+        <input
+          type="text"
+          placeholder={`editar ${nameInput}`}
+          value={newName}
+          onChange={(e) => setNewName(e.target.value)}
+          className={styles.update}
+        />
+        <button
+          className={styles.buttonUpdate}
+          onClick={() => update(id, newName, nameInput)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            style={{ fill: "#101010" }}
+          >
+            <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"></path>
+          </svg>
+        </button>
+      </div>
       <div className={styles.containerInput}>
         <input
           type="text"
@@ -84,6 +99,7 @@ const Items = ({
           value={inputPropName}
           placeholder={placeholder}
           onChange={(e) => handlerChange(e)}
+          className={styles.createItem}
         />
         <button onClick={send} className={styles.post}>
           <svg

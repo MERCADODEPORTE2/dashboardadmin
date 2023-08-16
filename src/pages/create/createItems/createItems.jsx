@@ -10,6 +10,9 @@ import {
   deleteColor,
   deleteSizes,
   deleteTags,
+  updateTags,
+  updateSizes,
+  updateColors,
 } from "../../../redux/actions";
 
 import Items from "./items";
@@ -21,8 +24,6 @@ const CreateItems = () => {
   const sizes = useSelector((state) => state.sizes);
   const dispatch = useDispatch();
 
-  // const [opeenn, setOpen] = useState(false);
-
   const [color, setColor] = useState({
     name: "",
     open: false,
@@ -30,12 +31,31 @@ const CreateItems = () => {
   const [tag, setTag] = useState({
     name: "",
     open: false,
+    openUpdate: false,
   });
   const [size, setSize] = useState({
     size: "",
     open: false,
   });
 
+  const update = (id, name, item) => {
+    let object = {};
+    if (id && name) {
+      if (item === "tags") {
+        object.id = id;
+        object.name = name;
+        dispatch(updateTags(object));
+      } else if (item === "size") {
+        object.id = id;
+        object.size = name;
+        dispatch(updateSizes(object));
+      } else {
+        object.id = id;
+        object.name = name;
+        dispatch(updateColors(object));
+      }
+    }
+  };
   // console.log(color.name);
   useEffect(() => {
     if (!colors.length) {
@@ -236,9 +256,8 @@ const CreateItems = () => {
               placeholder={"introdusca el talle"}
               handlerChange={handlerChangeSize}
               send={sendBackSize}
-              // opeenn={opeenn}
-              // setOpen={setOpen}
               remove={deleteSizeById}
+              update={update}
             />
           ) : null}
           {tag.open ? (
@@ -252,9 +271,8 @@ const CreateItems = () => {
               placeholder={"instrodusca el nombre de etiqueta"}
               handlerChange={handlerChangeTag}
               send={sendBackTag}
-              // opeenn={opeenn}
-              // setOpen={setOpen}
               remove={deleteTagById}
+              update={update}
             />
           ) : null}
           {color.open ? (
@@ -268,9 +286,8 @@ const CreateItems = () => {
               placeholder={"introdusca el nombre del color"}
               handlerChange={handlerChangeColor}
               send={sendBackColor}
-              // opeenn={opeenn}
-              // setOpen={setOpen}
               remove={deleteColorById}
+              update={update}
             />
           ) : null}
         </div>
